@@ -40,6 +40,14 @@
   elsif section.settings.media_size == 'small'
     assign media_width = 0.45
   endif
+
+  # 🎯 default mobile media source: the active variant's curated photo list
+  # when present, so the page opens showing only that color's images instead
+  # of every color mixed together. Falls back to all product.media otherwise.
+  assign default_media_list = product.media
+  if product.variants[0].metafields.custom.variant_images.value != blank
+    assign default_media_list = product.variants[0].metafields.custom.variant_images.value
+  endif
 -%}
 
 <media-gallery
@@ -213,7 +221,7 @@
   <div class="product-media-swiper swiper only-mobile">
     <div class="swiper-wrapper">
       {% assign first_image = false %}
-      {%- for media in product.media -%}
+      {%- for media in default_media_list -%}
         {% if forloop.first %}
           {% assign first_image = true %}
         {% else %}
@@ -337,7 +345,7 @@
             </button>
           </li>
         {%- endif -%}
-        {%- for media in product.media -%}
+        {%- for media in default_media_list -%}
           {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
             {%- liquid
               capture media_index
