@@ -1161,6 +1161,24 @@
                     content.classList.remove('open');
                   }
 
+                  // closes a sibling accordion with NO transition. Used when opening a
+                  // *different* item: if the previously-open one (e.g. "Know Your
+                  // Setting", which is open by default on page load) collapses with its
+                  // own animation at the same time the clicked one expands, the page
+                  // shifts up from above while the new content grows from below — that
+                  // combined motion is what made the very first open look like it
+                  // "overshoots". Closing it instantly removes that competing animation,
+                  // so only the newly-opened accordion is ever seen animating.
+                  function closeAccordionInstant(header, content) {
+                    const previousTransition = content.style.transition;
+                    content.style.transition = 'none';
+                    header.classList.remove('active');
+                    content.style.maxHeight = null;
+                    content.classList.remove('open');
+                    void content.offsetHeight;
+                    content.style.transition = previousTransition;
+                  }
+
                   function refreshOpenAccordionHeights() {
                     document.querySelectorAll('.accordion-content.open').forEach((content) => {
                       content.style.maxHeight = content.scrollHeight + 'px';
@@ -1175,9 +1193,10 @@
 
                     const isOpen = header.classList.contains('active');
 
-                    // close all other
+                    // close all other — instantly, so they don't visually compete
+                    // with the accordion the user actually clicked to open
                     document.querySelectorAll('.accordion-content.open').forEach((el) => {
-                      if (el !== content) closeAccordion(el.previousElementSibling, el);
+                      if (el !== content) closeAccordionInstant(el.previousElementSibling, el);
                     });
 
                     // toggle
