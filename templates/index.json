@@ -294,6 +294,16 @@
     "category_section_EnBNp7": {
       "type": "category-section",
       "blocks": {
+        "category_QC9QHU": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/6.webp",
+            "image_mobile": "shopify://shop_images/14.webp",
+            "title": "",
+            "under_text": "Solitaire",
+            "link": ""
+          }
+        },
         "category_GTG8Fr": {
           "type": "category",
           "settings": {
@@ -301,6 +311,36 @@
             "image_mobile": "shopify://shop_images/9.webp",
             "title": "",
             "under_text": "Bezel",
+            "link": ""
+          }
+        },
+        "category_YJWJVq": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/7.webp",
+            "image_mobile": "shopify://shop_images/15.webp",
+            "title": "",
+            "under_text": "Three Stone",
+            "link": ""
+          }
+        },
+        "category_achbtM": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/8.webp",
+            "image_mobile": "shopify://shop_images/16.webp",
+            "title": "",
+            "under_text": "Toi et Moi",
+            "link": ""
+          }
+        },
+        "category_UCHBHK": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/4.webp",
+            "image_mobile": "shopify://shop_images/12.webp",
+            "title": "",
+            "under_text": "Hidden  Halo",
             "link": ""
           }
         },
@@ -335,16 +375,6 @@
             "link": ""
           }
         },
-        "category_UCHBHK": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/4.webp",
-            "image_mobile": "shopify://shop_images/12.webp",
-            "title": "",
-            "under_text": "Hidden  Halo",
-            "link": ""
-          }
-        },
         "category_3FhD7p": {
           "type": "category",
           "settings": {
@@ -357,6 +387,7 @@
         },
         "category_bAV4H9": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Frame_1321315078_3819fc7e-e00d-4742-b17f-f006d3314151.png",
             "image_mobile": "shopify://shop_images/Frame_1321315078.png",
@@ -364,49 +395,19 @@
             "under_text": "",
             "link": ""
           }
-        },
-        "category_QC9QHU": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/6.webp",
-            "image_mobile": "shopify://shop_images/14.webp",
-            "title": "",
-            "under_text": "Solitaire",
-            "link": ""
-          }
-        },
-        "category_YJWJVq": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/7.webp",
-            "image_mobile": "shopify://shop_images/15.webp",
-            "title": "",
-            "under_text": "Three Stone",
-            "link": ""
-          }
-        },
-        "category_achbtM": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/8.webp",
-            "image_mobile": "shopify://shop_images/16.webp",
-            "title": "",
-            "under_text": "Toi et Moi",
-            "link": ""
-          }
         }
       },
       "block_order": [
+        "category_QC9QHU",
         "category_GTG8Fr",
+        "category_YJWJVq",
+        "category_achbtM",
+        "category_UCHBHK",
         "category_TUJjwF",
         "category_JpMqmq",
         "category_nMethh",
-        "category_UCHBHK",
         "category_3FhD7p",
-        "category_bAV4H9",
-        "category_QC9QHU",
-        "category_YJWJVq",
-        "category_achbtM"
+        "category_bAV4H9"
       ],
       "name": "Category Section",
       "settings": {
