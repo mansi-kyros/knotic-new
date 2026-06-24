@@ -494,22 +494,12 @@
                   show_pickup_availability: true
                 -%}
                 <div class="product_new_accordion">
-                  <div class="accordion-item">
-                    <button class="accordion-header active">
+                  <div class="accordion-item accordion-item--static">
+                    <button class="accordion-header accordion-header--static active" type="button" disabled>
                       <span>Know your setting</span>
-                      <svg
-                        class="accordion-icon"
-                        width="15"
-                        height="15"
-                        viewBox="0 0 15 15"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1 10.3812L1.62401 11L7.5 5.24426L13.3751 11L14 10.3812L7.49912 3.94426L1 10.3812Z" fill="black" stroke="black" stroke-width="0.5"></path>
-                      </svg>
                     </button>
                     <div class="accordion-content open">
-                      <div class="specs-grid-wrapper accordion-content-inner">
+                      <div class="specs-grid-wrapper">
                         <div class="specs-grid">
                           <div class="spec-card">
                             <h4 class="spec-title">Band Width</h4>
@@ -751,12 +741,8 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1 10.3812L1.62401 11L7.5 5.24426L13.3751 11L14 10.3812L7.49912 3.94426L1 10.3812Z" fill="black" stroke="black" stroke-width="0.5"></path>
                       </svg>
                     </button>
-                    <div class="accordion-content">
-                      <div class="accordion-content-inner">
-                        <p>Fully insured, tracked worldwide delivery with premium handling.</p>
-                        <p>Easy 30-day returns on unworn, non-customised jewellery.</p>
-                      </div>
-                    </div>
+                    <div class="accordion-content"><p>Fully insured, tracked worldwide delivery with premium handling.</p>
+                  <p>Easy 30-day returns on unworn, non-customised jewellery.</p></div>
                   </div>
                   <div class="accordion-item">
                     <button class="accordion-header">
@@ -772,9 +758,7 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1 10.3812L1.62401 11L7.5 5.24426L13.3751 11L14 10.3812L7.49912 3.94426L1 10.3812Z" fill="black" stroke="black" stroke-width="0.5"></path>
                       </svg>
                     </button>
-                    <div class="accordion-content">
-                      <div class="accordion-content-inner">Jewellery Care Tips</div>
-                    </div>
+                    <div class="accordion-content">Jewellery Care Tips</div>
                   </div>
                 </div>
 
@@ -827,26 +811,20 @@
                     transform: rotate(0deg);
                   }
 
-                  /* grid-rows based collapse instead of a JS-measured max-height:
-                     the browser computes the row size live every frame, so it can
-                     never "overshoot" on a first open, and several accordions can
-                     open/close at the same time and each still animates smoothly. */
                   .accordion-content {
-                    display: grid;
-                    grid-template-rows: 0fr;
+                    max-height: 0;
                     overflow: hidden;
-                    transition: grid-template-rows 0.25s ease-out;
+                    transition: max-height 0.25s ease-out;
                     border-radius: 8px;
                     font-size: 13px;
                     color: #555;
-                  }
-                  .accordion-content.open {
-                    grid-template-rows: 1fr;
-                  }
-                  .accordion-content-inner {
-                    overflow: hidden;
-                    min-height: 0;
                     padding: 0 12px;
+                  }
+                  .accordion-header--static {
+                    cursor: default;
+                  }
+                  .accordion-item--static .accordion-content {
+                    max-height: none !important;
                   }
                   .shipping-return p {
                     margin: 0 !important;
@@ -1161,29 +1139,33 @@
                 </style>
 
                 <script defer>
-                  // height comes from CSS (grid-template-rows 0fr/1fr), not a
-                  // JS-measured pixel value — so every open/close, including
-                  // several at once, animates smoothly with no overshoot.
                   function openAccordion(header, content) {
                     header.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + 'px';
                     content.classList.add('open');
                   }
 
                   function closeAccordion(header, content) {
                     header.classList.remove('active');
+                    content.style.maxHeight = null;
                     content.classList.remove('open');
                   }
 
                   document.addEventListener('click', (e) => {
                     const header = e.target.closest('.accordion-header');
-                    if (!header) return;
+                    if (!header || header.classList.contains('accordion-header--static')) return;
 
                     const content = header.nextElementSibling;
+
                     const isOpen = header.classList.contains('active');
 
-                    // close all other
+                    // close all other (skip the static "Know your setting" panel —
+                    // it always stays open and has no toggle icon)
                     document.querySelectorAll('.accordion-content.open').forEach((el) => {
-                      if (el !== content) closeAccordion(el.previousElementSibling, el);
+                      const otherHeader = el.previousElementSibling;
+                      if (el !== content && !otherHeader?.classList.contains('accordion-header--static')) {
+                        closeAccordion(otherHeader, el);
+                      }
                     });
 
                     // toggle
@@ -1191,16 +1173,20 @@
                     else closeAccordion(header, content);
                   });
 
-                  /* 🔥 OPEN FIRST ACCORDION BY DEFAULT */
-                  document.addEventListener('DOMContentLoaded', () => {
-                    const firstHeader = document.querySelector('.accordion-header');
-                    const firstContent = firstHeader?.nextElementSibling;
-
-                    if (firstHeader && firstContent) {
-                      firstHeader.classList.add('active');
-                      firstContent.classList.add('open');
-                    }
+                  // FIX iOS
+                  document.querySelectorAll('.accordion-content img').forEach((img) => {
+                    img.addEventListener('load', () => {
+                      const content = img.closest('.accordion-content');
+                      if (content.classList.contains('open')) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                      }
+                    });
                   });
+
+                  // "Know your setting" is already open by default via its
+                  // server-rendered active/open classes + the
+                  // .accordion-item--static CSS rule above — no JS needed to
+                  // open it, and nothing else should auto-open on load.
                 </script>
 
               {%- when 'rating' -%}
