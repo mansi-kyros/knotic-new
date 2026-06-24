@@ -77,6 +77,17 @@
     "tie_knot_centered_swiper_kRGMkU": {
       "type": "tie-knot-centered-swiper",
       "blocks": {
+        "slide_iTbMN4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group-2.webp",
+            "title": "Engagement Rings",
+            "button_1_text": "Shop Now",
+            "button_1_url": "",
+            "button_2_text": "Learn More",
+            "button_2_url": ""
+          }
+        },
         "slide_Nw7KXj": {
           "type": "slide",
           "settings": {
@@ -99,17 +110,6 @@
             "button_2_url": ""
           }
         },
-        "slide_3akn6t": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Mask_group-4.webp",
-            "title": "Men's Wedding Bands",
-            "button_1_text": "Shop Now",
-            "button_1_url": "",
-            "button_2_text": "Learn More",
-            "button_2_url": ""
-          }
-        },
         "slide_q3cEqV": {
           "type": "slide",
           "settings": {
@@ -121,11 +121,11 @@
             "button_2_url": ""
           }
         },
-        "slide_iTbMN4": {
+        "slide_3akn6t": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Mask_group-2.webp",
-            "title": "Engagement Rings",
+            "image": "shopify://shop_images/Mask_group-4.webp",
+            "title": "Men's Wedding Bands",
             "button_1_text": "Shop Now",
             "button_1_url": "",
             "button_2_text": "Learn More",
@@ -134,11 +134,11 @@
         }
       },
       "block_order": [
+        "slide_iTbMN4",
         "slide_Nw7KXj",
         "slide_cVYngC",
-        "slide_3akn6t",
         "slide_q3cEqV",
-        "slide_iTbMN4"
+        "slide_3akn6t"
       ],
       "custom_css": [
         "h3 {color: #000000;}"
