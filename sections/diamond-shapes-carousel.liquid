@@ -1,0 +1,599 @@
+{%- liquid
+  if section.blocks.size > 1
+    assign has_multiple_slides = section.blocks.size
+  endif
+  assign container_class = 'page-width'
+  if section.settings.full_width
+    assign container_class = 'page-width--full'
+  endif
+-%}
+
+{%- style -%}
+        #shopify-section-{{ section.id }} {
+          --section-padding-top: {{ section.settings.padding_top_mobile }}px;
+          --section-padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+        }
+
+        @media screen and (min-width: 600px) {
+          #shopify-section-{{ section.id }} {
+            --section-padding-top: {{ section.settings.padding_top_ipad_vertical }}px;
+            --section-padding-bottom: {{ section.settings.padding_bottom_ipad_vertical }}px;
+          }
+        }
+
+        @media screen and (min-width: 834px) {
+          #shopify-section-{{ section.id }} {
+            --section-padding-top: {{ section.settings.padding_top_ipad_horizontal }}px;
+            --section-padding-bottom: {{ section.settings.padding_bottom_ipad_horizontal }}px;
+          }
+        }
+
+        @media screen and (min-width: 1024px) {
+          #shopify-section-{{ section.id }} {
+            --section-padding-top: {{ section.settings.padding_top_desktop }}px;
+            --section-padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+          }
+        }
+
+        #shopify-section-{{ section.id }} {
+          padding-top: var(--section-padding-top);
+          padding-bottom: var(--section-padding-bottom);
+        }
+
+        .diamond-carousel {
+          position: relative;
+          max-width: 100%;
+          overflow: hidden;
+        }
+
+        .diamond-carousel__header {
+          text-align: center;
+          margin-bottom: 32px;
+          padding: 0 20px;
+        }
+
+        .diamond-carousel__title {
+          margin: 0 0 16px;
+          font-size: 32px;
+          font-weight: 700;
+          line-height: 1.2;
+        }
+
+        .diamond-carousel__description {
+          max-width: 800px;
+          margin: 0 auto;
+          font-size: 16px;
+          line-height: 1.6;
+        }
+
+        .diamond-carousel .swiper {
+          padding: 40px 0;
+          overflow: visible;
+        }
+
+        .diamond-carousel .swiper-wrapper {
+          align-items: center;
+        }
+
+        .diamond-carousel .swiper-slide {
+          transition: transform 0.3s ease, opacity 0.3s ease;
+          opacity: 0.5;
+          transform: scale(0.85);
+        }
+
+        .diamond-carousel .swiper-slide-prev,
+        .diamond-carousel .swiper-slide-next {
+          opacity: 0.8;
+          transform: scale(0.9);
+        }
+
+        .diamond-carousel .swiper-slide-active {
+          opacity: 1;
+          transform: scale(1);
+          z-index: 2;
+        }
+
+        .diamond-slide {
+          position: relative;
+          padding-bottom: 120%;
+          border-radius: 8px;
+          overflow: hidden;
+          transform-origin: center;
+        }
+
+        .diamond-slide__image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .diamond-slide__content {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 24px;
+          background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+          color: #fff;
+          text-align: center;
+        }
+
+        .diamond-slide__title {
+          margin: 0 0 8px;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 1.3;
+        }
+
+        .diamond-slide__link {
+          display: inline-block;
+          margin-top: 12px;
+          padding: 8px 24px;
+          background: #fff;
+          color: #000;
+          text-decoration: none;
+          border-radius: 20px;
+          font-weight: 500;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .diamond-slide__link:hover {
+          transform: translateY(-2px);
+          opacity: 0.9;
+        }
+
+        .diamond-carousel__navigation {
+          position: relative;
+          margin-top: 20px;
+          text-align: center;
+        }
+
+        .diamond-carousel__button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          margin: 0 8px;
+          padding: 0;
+          border: 1px solid #000;
+          border-radius: 50%;
+          background: #fff;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .diamond-carousel__button:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
+
+        .diamond-carousel__button svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        @media (max-width: 767px) {
+          .diamond-carousel__title {
+            font-size: 24px;
+          }
+
+          .diamond-carousel__description {
+            font-size: 14px;
+          }
+        }
+
+       /* All slides small by default */
+  .diamond-carousel .swiper-slide {
+    opacity: 0.5;
+    transform: scale(0.8);
+    transition: transform .4s ease, opacity .4s ease;
+  }
+
+  /* Slides just before and after center */
+  .diamond-carousel .swiper-slide-prev,
+  .diamond-carousel .swiper-slide-next {
+    opacity: 0.8;
+    transform: scale(0.9);
+  }
+
+  /* Center slide bigger */
+  .diamond-carousel .swiper-slide-active {
+    opacity: 1;
+    transform: scale(1.25);
+    z-index: 10;
+  }
+{%- endstyle -%}
+
+<div class="diamond-carousel {{ container_class }}">
+  <div class="diamond-carousel__header">
+    {%- if section.settings.title != blank -%}
+      <h2 class="diamond-carousel__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.description != blank -%}
+      <div class="diamond-carousel__description">
+        {{ section.settings.description }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div
+    class="swiper"
+    data-swiper-type="diamond-carousel"
+    data-per-row-mobile="{{ section.settings.per_row_mobile }}"
+    data-gap-mobile="{{ section.settings.gap_mobile }}"
+    data-per-row-ipad-vertical="{{ section.settings.per_row_ipad_vertical }}"
+    data-gap-ipad-vertical="{{ section.settings.gap_ipad_vertical }}"
+    data-per-row-ipad-horizontal="{{ section.settings.per_row_ipad_horizontal }}"
+    data-gap-ipad-horizontal="{{ section.settings.gap_ipad_horizontal }}"
+    data-per-row-desktop="{{ section.settings.per_row_desktop }}"
+    data-gap-desktop="{{ section.settings.gap_desktop }}"
+  >
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        <div class="swiper-slide" {{ block.shopify_attributes }}>
+          <div class="diamond-slide">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 800
+                | image_tag: loading: 'lazy', class: 'diamond-slide__image', alt: block.settings.image.alt
+                | escape
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'diamond-slide__image placeholder-svg' }}
+            {%- endif -%}
+            <div class="diamond-slide__content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="diamond-slide__title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="diamond-slide__link">
+                  {{ block.settings.link_label | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if has_multiple_slides -%}
+    <div class="diamond-carousel__navigation">
+      <button type="button" class="diamond-carousel__button diamond-carousel__button--prev" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button type="button" class="diamond-carousel__button diamond-carousel__button--next" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (typeof Swiper === "undefined") return;
+
+  const initDiamondCarousel = () => {
+    const container = document.querySelector("#shopify-section-{{ section.id }} .swiper");
+    if (!container || container.classList.contains("swiper-initialized")) return;
+
+    const swiper = new Swiper(container, {
+      loop: true,
+      centeredSlides: true,
+      grabCursor: true,
+
+      breakpoints: {
+        0: {
+          slidesPerView: 3,
+          spaceBetween: 10,
+        },
+        600: {
+          slidesPerView: 5,
+          spaceBetween: 15,
+        },
+        1024: {
+          slidesPerView: 7,  // EXACT screenshot layout
+          spaceBetween: 20,
+        },
+        1400: {
+          slidesPerView: 7,
+          spaceBetween: 20,
+        },
+      },
+
+      navigation: {
+        nextEl: "#shopify-section-{{ section.id }} .diamond-carousel__button--next",
+        prevEl: "#shopify-section-{{ section.id }} .diamond-carousel__button--prev",
+      },
+
+      on: {
+        init() {
+          container.classList.add("swiper-initialized");
+        },
+      },
+    });
+  };
+
+  setTimeout(initDiamondCarousel, 0);
+  document.addEventListener("shopify:section:load", initDiamondCarousel);
+});
+</script>
+
+
+{% schema %}
+{
+  "name": "Diamond Shapes Carousel",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make section full width",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Diamond Shapes"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Explore our exquisite collection of diamond shapes</p>"
+    },
+    {
+      "type": "header",
+      "content": "Carousel Settings",
+      "info": "Adjust the number of slides visible and spacing between them"
+    },
+    {
+      "type": "header",
+      "content": "Mobile (0-599px)"
+    },
+    {
+      "type": "range",
+      "id": "per_row_mobile",
+      "min": 1,
+      "max": 10,
+      "step": 0.1,
+      "label": "Slides per view",
+      "default": 1.2
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "label": "Space between slides (px)",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "iPad Vertical (600-833px)"
+    },
+    {
+      "type": "range",
+      "id": "per_row_ipad_vertical",
+      "min": 1,
+      "max": 10,
+      "step": 0.1,
+      "label": "Slides per view",
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "gap_ipad_vertical",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "label": "Space between slides (px)",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "iPad Horizontal (834-1023px)"
+    },
+    {
+      "type": "range",
+      "id": "per_row_ipad_horizontal",
+      "min": 1,
+      "max": 10,
+      "step": 0.1,
+      "label": "Slides per view",
+      "default": 2.2
+    },
+    {
+      "type": "range",
+      "id": "gap_ipad_horizontal",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "label": "Space between slides (px)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Desktop (1024px+)"
+    },
+    {
+      "type": "range",
+      "id": "per_row_desktop",
+      "min": 1,
+      "max": 10,
+      "step": 0.1,
+      "label": "Slides per view",
+      "default": 3.2
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "label": "Space between slides (px)",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Section Padding",
+      "info": "Adjust padding for different screen sizes"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile bottom padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_ipad_vertical",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "iPad vertical top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_ipad_vertical",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "iPad vertical bottom padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_ipad_horizontal",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "iPad horizontal top padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_ipad_horizontal",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "iPad horizontal bottom padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop top padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop bottom padding",
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "diamond_shape",
+      "name": "Diamond Shape",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended size: 800x1000px (aspect ratio 4:5)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Diamond Shape"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Button label",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Diamond Shapes Carousel",
+      "blocks": [
+        {
+          "type": "diamond_shape",
+          "settings": {
+            "title": "Round"
+          }
+        },
+        {
+          "type": "diamond_shape",
+          "settings": {
+            "title": "Princess"
+          }
+        },
+        {
+          "type": "diamond_shape",
+          "settings": {
+            "title": "Emerald"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

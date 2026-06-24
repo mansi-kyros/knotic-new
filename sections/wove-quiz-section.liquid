@@ -1,0 +1,627 @@
+{% comment %}
+  ═══════════════════════════════════════════════════════
+  WOVE QUESTIONNAIRE — Self-Contained Section
+  File: sections/wove-quiz-section.liquid
+
+  INSTALL:
+  1. Upload this file to: Sections folder
+  2. In theme.liquid, add just before </body>:
+       {% section 'wove-quiz-section' %}
+  3. Done! Any button with data-wove-open attribute opens it.
+  ═══════════════════════════════════════════════════════
+{% endcomment %}
+
+<style>
+  #wove-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998}
+  #wove-overlay.wq-on{display:block}
+  #wove-wrap{display:none;position:fixed;inset:0;z-index:9999;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  #wove-wrap.wq-on{display:flex;flex-direction:column;align-items:center}
+  .wq-box{background:#F7F4EF;width:100%;max-width:620px;min-height:100vh;position:relative;font-family:-apple-system,'Helvetica Neue',sans-serif}
+  .wq-head{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;background:#FDFBF8;border-bottom:1px solid #DDD8CF;position:sticky;top:0;z-index:10}
+  .wq-logo{font-family:'Cormorant Garamond','Georgia',serif;font-size:20px;font-weight:500;letter-spacing:6px;text-transform:uppercase;color:#2C2820}
+  .wq-x{background:none;border:none;cursor:pointer;font-size:22px;color:#6B6358;line-height:1;padding:4px 8px}
+  .wq-x:hover{color:#2C2820}
+  .wq-prog-wrap{background:#FDFBF8;padding:0 28px 14px;border-bottom:1px solid #DDD8CF}
+  .wq-track{height:1px;background:#DDD8CF;width:100%}
+  .wq-fill{height:1px;background:#B8965A;transition:width .5s ease;width:12.5%}
+  .wq-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#A89E92;text-align:center;margin-top:10px}
+  .wq-body{padding:48px 28px 80px;max-width:500px;margin:0 auto}
+  .wq-step{display:none}
+  .wq-step.wq-on{display:block;animation:wqFade .35s ease}
+  @keyframes wqFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .wq-title{font-family:'Cormorant Garamond','Georgia',serif;font-size:34px;font-weight:400;line-height:1.2;text-align:center;color:#2C2820;margin-bottom:8px}
+  .wq-sub{text-align:center;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#A89E92;margin-bottom:34px}
+  .wq-note{font-size:12px;color:#6B6358;text-align:center;line-height:1.7;border-top:1px solid #DDD8CF;padding-top:18px;margin-top:24px}
+  .wq-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .wq-cards .wq-card:last-child:nth-child(odd){grid-column:1/-1}
+  .wq-card{background:#FDFBF8;border:1px solid #DDD8CF;padding:22px 12px 16px;cursor:pointer;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;transition:border-color .15s,background .15s}
+  .wq-card:hover,.wq-card.wq-sel{border-color:#B8965A;background:#FBF6EE;box-shadow:inset 0 0 0 1px #B8965A}
+  .wq-card-lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#2C2820}
+  .wq-list{display:flex;flex-direction:column;gap:8px}
+  .wq-item{background:#FDFBF8;border:1px solid #DDD8CF;padding:14px 20px;cursor:pointer;text-align:center;font-family:'Cormorant Garamond','Georgia',serif;font-size:17px;color:#2C2820;transition:border-color .15s,background .15s}
+  .wq-item:hover,.wq-item.wq-sel{border-color:#B8965A;background:#FBF6EE;box-shadow:inset 0 0 0 1px #B8965A}
+  .wq-metals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .wq-metal{background:#FDFBF8;border:1px solid #DDD8CF;padding:16px 12px;cursor:pointer;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;transition:border-color .15s,background .15s}
+  .wq-metal:hover,.wq-metal.wq-sel{border-color:#B8965A;background:#FBF6EE;box-shadow:inset 0 0 0 1px #B8965A}
+  .wq-metal.wq-full{grid-column:1/-1}
+  .wq-swatch{width:50px;height:50px;border-radius:50%}
+  .wq-mlbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#2C2820}
+  .wq-fields{display:flex;flex-direction:column;gap:14px}
+  .wq-flbl{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#A89E92;margin-bottom:5px}
+  .wq-input{width:100%;background:#FDFBF8;border:1px solid #DDD8CF;padding:13px 14px;font-size:15px;color:#2C2820;outline:none;font-family:inherit;-webkit-appearance:none;border-radius:0;box-sizing:border-box;transition:border-color .2s}
+  .wq-input:focus{border-color:#B8965A}
+  .wq-input::placeholder{color:#A89E92;font-size:13px}
+  .wq-row{display:grid;grid-template-columns:150px 1fr;gap:10px}
+  select.wq-input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23A89E92' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
+  .wq-hint{font-size:11px;color:#A89E92;margin-top:5px}
+  .wq-privacy{font-size:11px;color:#A89E92;text-align:center;line-height:1.6;margin-top:8px}
+  .wq-btn{display:block;width:100%;margin-top:26px;padding:15px;border:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:opacity .2s}
+  .wq-btn:disabled{opacity:.35;cursor:not-allowed}
+  .wq-btn.wq-dark{background:#2C2820;color:#F7F4EF}
+  .wq-btn.wq-dark:not(:disabled):hover{opacity:.85}
+  .wq-btn.wq-out{background:transparent;color:#A89E92;border:1px solid #DDD8CF;margin-top:8px}
+  .wq-btn.wq-out:hover{color:#2C2820;border-color:#2C2820}
+  .wq-btn.wq-gold{background:#B8965A;color:#FDFBF8;margin-top:14px}
+  .wq-btn.wq-gold:hover{background:#D4B27A}
+  .wq-final{text-align:center;padding:20px 0}
+  .wq-tick{width:66px;height:66px;border-radius:50%;border:1px solid #B8965A;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:24px;color:#B8965A}
+  .wq-summary{background:#FDFBF8;border:1px solid #DDD8CF;padding:18px;margin:24px 0 0;text-align:left}
+  .wq-row2{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 0;border-bottom:1px solid #EDE8DF}
+  .wq-row2:last-child{border-bottom:none}
+  .wq-sk{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#A89E92;white-space:nowrap}
+  .wq-sv{font-family:'Cormorant Garamond','Georgia',serif;font-size:15px;color:#2C2820;text-align:right}
+  .wq-spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:wqSpin .6s linear infinite;vertical-align:middle;margin-right:6px}
+  @keyframes wqSpin{to{transform:rotate(360deg)}}
+  @media(max-width:480px){.wq-title{font-size:26px}.wq-body{padding:32px 18px 80px}.wq-head{padding:16px 18px}.wq-prog-wrap{padding:0 18px 12px}.wq-row{grid-template-columns:130px 1fr}}
+</style>
+
+<!-- OVERLAY -->
+<div id="wove-overlay" onclick="WQ.close()"></div>
+
+<!-- MODAL WRAP -->
+<div id="wove-wrap">
+  <div class="wq-box">
+    <div class="wq-head">
+      <div style="width:28px"></div>
+      <div class="wq-logo">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/image_3151.png?v=1775125199"
+          height="100%"
+          width="100%"
+        >
+      </div>
+      <button class="wq-x" onclick="WQ.close()" aria-label="Close">&#10005;</button>
+    </div>
+
+    <div class="wq-prog-wrap">
+      <div class="wq-track"><div class="wq-fill" id="wq-fill"></div></div>
+      <div class="wq-label" id="wq-lbl">Step 1 of 8</div>
+    </div>
+
+    <div class="wq-body">
+      <!-- STEP 1 -->
+      <div class="wq-step wq-on" id="wqs1">
+        <h2 class="wq-title">
+          What do you want<br>
+          to design?
+        </h2>
+        <p class="wq-sub">We can always design more later</p>
+        <div class="wq-cards">
+          <div class="wq-card" onclick="WQ.pick(this,1,'design','Engagement Ring')">
+            <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+              <circle cx="35" cy="43" r="19" stroke="#B8965A" stroke-width="2.5"/><polygon points="35,9 41,21 29,21" fill="#D4B27A" opacity=".8"/><polygon points="29,21 35,9 41,21 38,26 32,26" fill="#B8965A"/>
+            </svg>
+            <span class="wq-card-lbl">Engagement Ring</span>
+          </div>
+          <div class="wq-card" onclick="WQ.pick(this,1,'design','Wedding Band')">
+            <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+              <circle cx="35" cy="35" r="21" stroke="#B8965A" stroke-width="4.5"/>
+            </svg>
+            <span class="wq-card-lbl">Wedding Band</span>
+          </div>
+          <div class="wq-card" onclick="WQ.pick(this,1,'design','Other Fine Jewelry')">
+            <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+              <path d="M14 14Q35 6 56 14" stroke="#B8965A" stroke-width="2" fill="none"/><line x1="35" y1="14" x2="35" y2="46" stroke="#B8965A" stroke-width="1.5"/><polygon points="35,46 29,40 41,40" fill="#D4B27A" opacity=".9"/><polygon points="35,54 28,47 42,47" fill="#B8965A" opacity=".6"/>
+            </svg>
+            <span class="wq-card-lbl">Other Fine Jewelry</span>
+          </div>
+        </div>
+        <button class="wq-btn wq-dark" id="wqb1" disabled onclick="WQ.go(2)">Continue</button>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="wq-step" id="wqs2">
+        <h2 class="wq-title">For this design I...</h2>
+        <p class="wq-sub">&nbsp;</p>
+        <div class="wq-list">
+          <div class="wq-item" onclick="WQ.pick(this,2,'vision','Know exactly what I want')">
+            Know exactly what I want
+          </div>
+          <div class="wq-item" onclick="WQ.pick(this,2,'vision','Have some inspiration images')">
+            Have some inspiration images
+          </div>
+          <div class="wq-item" onclick="WQ.pick(this,2,'vision','Narrowed it down to a few ideas')">
+            Narrowed it down to a few ideas
+          </div>
+          <div class="wq-item" onclick="WQ.pick(this,2,'vision','Have no clue where to start')">
+            Have no clue where to start
+          </div>
+        </div>
+        <div class="wq-note">
+          We ask this to understand your starting point. You can share inspiration photos at any time.
+        </div>
+        <button class="wq-btn wq-dark" id="wqb2" disabled onclick="WQ.go(3)">Continue</button>
+        <button class="wq-btn wq-out" onclick="WQ.go(1)">Back</button>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="wq-step" id="wqs3">
+        <h2 class="wq-title">
+          Which metal type<br>
+          do you like?
+        </h2>
+        <p class="wq-sub">You can select more than one</p>
+        <div class="wq-metals" id="wq-metals">
+          <div class="wq-metal" onclick="WQ.metal(this,'Yellow Gold')">
+            <div
+              class="wq-swatch"
+              style="background:radial-gradient(circle at 35% 35%,#F5D875,#B8840A);border:2px solid #C9942A"
+            ></div>
+            <span class="wq-mlbl">Yellow Gold</span>
+          </div>
+          <div class="wq-metal" onclick="WQ.metal(this,'Rose Gold')">
+            <div
+              class="wq-swatch"
+              style="background:radial-gradient(circle at 35% 35%,#F4C4B0,#C07860);border:2px solid #C07860"
+            ></div>
+            <span class="wq-mlbl">Rose Gold</span>
+          </div>
+          <div class="wq-metal" onclick="WQ.metal(this,'White Gold')">
+            <div
+              class="wq-swatch"
+              style="background:radial-gradient(circle at 35% 35%,#F8F8F8,#B0B0B8);border:2px solid #A0A0A8"
+            ></div>
+            <span class="wq-mlbl">White Gold</span>
+          </div>
+          <div class="wq-metal" onclick="WQ.metal(this,'Platinum')">
+            <div
+              class="wq-swatch"
+              style="background:radial-gradient(circle at 35% 35%,#EEEEEE,#909098);border:2px solid #888898"
+            ></div>
+            <span class="wq-mlbl">Platinum</span>
+          </div>
+          <div class="wq-metal wq-full" id="wq-notsure" onclick="WQ.metal(this,'notsure')">
+            <span style="font-family:'Cormorant Garamond','Georgia',serif;font-size:16px;color:#2C2820"
+              >I'm not sure</span
+            >
+          </div>
+        </div>
+        <button class="wq-btn wq-dark" id="wqb3" disabled onclick="WQ.go(4)">Continue</button>
+        <button class="wq-btn wq-out" onclick="WQ.go(2)">Back</button>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="wq-step" id="wqs4">
+        <h2 class="wq-title">
+          Natural or<br>
+          lab-grown diamond?
+        </h2>
+        <p class="wq-sub">&nbsp;</p>
+        <div class="wq-list">
+          <div class="wq-item" onclick="WQ.pick(this,4,'diamond','Natural diamond')">Natural diamond</div>
+          <div class="wq-item" onclick="WQ.pick(this,4,'diamond','Lab-grown diamond')">Lab-grown diamond</div>
+          <div class="wq-item" onclick="WQ.pick(this,4,'diamond','Either lab or natural')">Either lab or natural</div>
+          <div class="wq-item" onclick="WQ.pick(this,4,'diamond','Other precious gemstone')">
+            Other precious gemstone
+          </div>
+          <div class="wq-item" onclick="WQ.pick(this,4,'diamond','Need more information')">
+            Need more information to decide
+          </div>
+        </div>
+        <div class="wq-note">
+          We can create your piece with either option. All our natural diamonds are ethically sourced.
+        </div>
+        <button class="wq-btn wq-dark" id="wqb4" disabled onclick="WQ.go(5)">Continue</button>
+        <button class="wq-btn wq-out" onclick="WQ.go(3)">Back</button>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="wq-step" id="wqs5">
+        <h2 class="wq-title">
+          When do you need<br>
+          your piece?
+        </h2>
+        <p class="wq-sub">&nbsp;</p>
+        <div class="wq-list">
+          <div class="wq-item" onclick="WQ.pick(this,5,'timeline','1 – 4 weeks')">1 – 4 weeks</div>
+          <div class="wq-item" onclick="WQ.pick(this,5,'timeline','1 – 3 months')">1 – 3 months</div>
+          <div class="wq-item" onclick="WQ.pick(this,5,'timeline','3 – 6 months')">3 – 6 months</div>
+          <div class="wq-item" onclick="WQ.pick(this,5,'timeline','No idea, just want to start')">
+            No idea, I just want to start
+          </div>
+        </div>
+        <div class="wq-note">
+          Our pieces are created in-house so we work quickly. Try a replica ring for up to a month — yours to keep if
+          you buy the final piece.
+        </div>
+        <button class="wq-btn wq-dark" id="wqb5" disabled onclick="WQ.go(6)">Continue</button>
+        <button class="wq-btn wq-out" onclick="WQ.go(4)">Back</button>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="wq-step" id="wqs6">
+        <h2 class="wq-title">
+          What's your first<br>
+          and last name?
+        </h2>
+        <p class="wq-sub">We'll match you with a designer in minutes</p>
+        <div class="wq-fields">
+          <div>
+            <label class="wq-flbl" for="wq-name">Full Name</label>
+            <input
+              class="wq-input"
+              id="wq-name"
+              type="text"
+              placeholder="e.g. Priya Sharma"
+              autocomplete="name"
+              oninput="WQ.chkName(this.value)"
+            >
+          </div>
+        </div>
+        <button class="wq-btn wq-dark" id="wqb6" disabled onclick="WQ.go(7)">Continue</button>
+        <button class="wq-btn wq-out" onclick="WQ.go(5)">Back</button>
+      </div>
+
+      <!-- STEP 7 -->
+      <div class="wq-step" id="wqs7">
+        <h2 class="wq-title">
+          Let's set you up<br>
+          with a designer!
+        </h2>
+        <p class="wq-sub">Create your account</p>
+        <div class="wq-fields">
+          <div>
+            <label class="wq-flbl" for="wq-email">Email Address</label>
+            <input
+              class="wq-input"
+              id="wq-email"
+              type="email"
+              placeholder="hello@example.com"
+              autocomplete="email"
+              oninput="WQ.chkContact()"
+            >
+          </div>
+          <div>
+            <label class="wq-flbl">Phone Number</label>
+            <div class="wq-row">
+              <select class="wq-input" id="wq-code" onchange="WQ.chkContact()">
+                <option value="+91">+91 India</option>
+                <option value="+1">+1 US / Canada</option>
+                <option value="+44">+44 UK</option>
+                <option value="+61">+61 Australia</option>
+                <option value="+971">+971 UAE</option>
+                <option value="+65">+65 Singapore</option>
+              </select>
+              <input
+                class="wq-input"
+                id="wq-phone"
+                type="tel"
+                placeholder="98765 43210"
+                autocomplete="tel"
+                oninput="WQ.chkContact()"
+              >
+            </div>
+          </div>
+        </div>
+        <p class="wq-privacy">By providing your number you consent to SMS contact. Reply STOP to opt-out.</p>
+        <button class="wq-btn wq-dark" id="wqb7" disabled onclick="WQ.go(8)">Meet with Designer</button>
+        <button class="wq-btn wq-out" onclick="WQ.go(6)">Back</button>
+      </div>
+
+      <!-- STEP 8 -->
+      <div class="wq-step" id="wqs8">
+        <h2 class="wq-title">
+          How would you like<br>
+          to meet your designer?
+        </h2>
+        <p class="wq-sub">Free 30-minute design consultation</p>
+        <div class="wq-list">
+          <div class="wq-item" onclick="WQ.pick(this,8,'meeting','Call me now')">Call Me Now</div>
+          <div class="wq-item" onclick="WQ.pick(this,8,'meeting','Schedule a call')">Schedule a Call</div>
+          <div class="wq-item" onclick="WQ.pick(this,8,'meeting','Not ready to book')">Not Ready to Book</div>
+        </div>
+        <button class="wq-btn wq-dark" id="wqb8" disabled onclick="WQ.send()">Send My Design Brief</button>
+        <button class="wq-btn wq-out" onclick="WQ.go(7)">Back</button>
+      </div>
+
+      <!-- FINAL -->
+      <div class="wq-step" id="wqs-final">
+        <div class="wq-final">
+          <div class="wq-tick">&#10003;</div>
+          <h2 class="wq-title">Thank you!</h2>
+          <p style="color:#6B6358;margin-top:10px;font-size:15px;line-height:1.8">
+            Your design brief has been sent.<br>
+            A Knotic designer will be in touch soon.
+          </p>
+          <div class="wq-summary" id="wq-summary"></div>
+          <button class="wq-btn wq-gold" onclick="WQ.close()">Back to Store</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.WQ = (function () {
+    var A = {
+      design: '',
+      vision: '',
+      metals: [],
+      diamond: '',
+      timeline: '',
+      name: '',
+      email: '',
+      phone: '',
+      meeting: '',
+    };
+    var cur = 1;
+
+    // ── CONFIG ── replace these with your EmailJS details ──────────
+    var EJ_KEY = '6Prtt1iy1mPUJ6Sh5'; // emailjs.com → Account
+    var EJ_SERVICE = 'YOUR_SERVICE_ID'; // emailjs.com → Email Services
+    var EJ_TEMPLATE = 'YOUR_TEMPLATE_ID'; // emailjs.com → Email Templates
+    var TO_EMAIL = 'your@email.com'; // your receiving email
+    // ────────────────────────────────────────────────────────────────
+
+    function open() {
+      reset();
+      document.getElementById('wove-overlay').classList.add('wq-on');
+      document.getElementById('wove-wrap').classList.add('wq-on');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      document.getElementById('wove-overlay').classList.remove('wq-on');
+      document.getElementById('wove-wrap').classList.remove('wq-on');
+      document.body.style.overflow = '';
+    }
+
+    function reset() {
+      A = {
+        design: '',
+        vision: '',
+        metals: [],
+        diamond: '',
+        timeline: '',
+        name: '',
+        email: '',
+        phone: '',
+        meeting: '',
+      };
+      cur = 1;
+      document.querySelectorAll('.wq-step').forEach(function (s) {
+        s.classList.remove('wq-on');
+      });
+      document.querySelectorAll('.wq-card,.wq-item,.wq-metal').forEach(function (e) {
+        e.classList.remove('wq-sel');
+      });
+      document.querySelectorAll('.wq-btn.wq-dark').forEach(function (b) {
+        b.disabled = true;
+        b.innerHTML = b.innerHTML.replace(/<span[^>]*>.*?<\/span>\s*/, '');
+      });
+      document.querySelectorAll('.wq-input').forEach(function (i) {
+        i.value = '';
+      });
+      var s = document.getElementById('wqs1');
+      if (s) s.classList.add('wq-on');
+      prog(1);
+    }
+
+    function go(n) {
+      document.querySelectorAll('.wq-step').forEach(function (s) {
+        s.classList.remove('wq-on');
+      });
+      var el = document.getElementById('wqs' + n);
+      if (el) {
+        el.classList.add('wq-on');
+        cur = n;
+        prog(n);
+      }
+      var box = document.querySelector('.wq-box');
+      if (box) box.scrollTop = 0;
+    }
+
+    function prog(n) {
+      var fill = document.getElementById('wq-fill');
+      var lbl = document.getElementById('wq-lbl');
+      if (fill) fill.style.width = Math.round((n / 8) * 100) + '%';
+      if (lbl) lbl.textContent = 'Step ' + n + ' of 8';
+    }
+
+    // Single-select for cards and list items
+    function pick(el, step, key, val) {
+      var parent = el.parentElement;
+      parent.querySelectorAll('.wq-card,.wq-item').forEach(function (c) {
+        c.classList.remove('wq-sel');
+      });
+      el.classList.add('wq-sel');
+      A[key] = val;
+      var btn = document.getElementById('wqb' + step);
+      if (btn) btn.disabled = false;
+    }
+
+    // Multi-select for metals
+    function metal(el, val) {
+      var ns = document.getElementById('wq-notsure');
+      if (val === 'notsure') {
+        document.querySelectorAll('#wq-metals .wq-metal').forEach(function (m) {
+          m.classList.remove('wq-sel');
+        });
+        el.classList.add('wq-sel');
+        A.metals = ["I'm not sure"];
+      } else {
+        if (ns) ns.classList.remove('wq-sel');
+        A.metals = A.metals.filter(function (m) {
+          return m !== "I'm not sure";
+        });
+        if (el.classList.contains('wq-sel')) {
+          el.classList.remove('wq-sel');
+          A.metals = A.metals.filter(function (m) {
+            return m !== val;
+          });
+        } else {
+          el.classList.add('wq-sel');
+          A.metals.push(val);
+        }
+      }
+      var btn = document.getElementById('wqb3');
+      if (btn) btn.disabled = A.metals.length === 0;
+    }
+
+    function chkName(v) {
+      A.name = v.trim();
+      var b = document.getElementById('wqb6');
+      if (b) b.disabled = A.name.length < 2;
+    }
+
+    function chkContact() {
+      var em = document.getElementById('wq-email');
+      var ph = document.getElementById('wq-phone');
+      var cd = document.getElementById('wq-code');
+      A.email = em ? em.value.trim() : '';
+      A.phone = (cd ? cd.value : '') + ' ' + (ph ? ph.value.trim() : '');
+      var ok = A.email.indexOf('@') > 0 && (ph ? ph.value.trim().length >= 7 : false);
+      var b = document.getElementById('wqb7');
+      if (b) b.disabled = !ok;
+    }
+
+    function send() {
+      var btn = document.getElementById('wqb8');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="wq-spin"></span> Sending...';
+      }
+
+      var params = {
+        to_email: TO_EMAIL,
+        customer_name: A.name,
+        customer_email: A.email,
+        customer_phone: A.phone,
+        design: A.design,
+        vision: A.vision,
+        metal: A.metals.join(', '),
+        diamond: A.diamond,
+        timeline: A.timeline,
+        meeting: A.meeting,
+      };
+
+      function done() {
+        // Build summary
+        var rows = [
+          ['Name', A.name],
+          ['Email', A.email],
+          ['Phone', A.phone],
+          ['Designing', A.design],
+          ['Vision', A.vision],
+          ['Metal', A.metals.join(', ')],
+          ['Stone', A.diamond],
+          ['Timeline', A.timeline],
+          ['Meeting', A.meeting],
+        ];
+        var box = document.getElementById('wq-summary');
+        if (box)
+          box.innerHTML = rows
+            .filter(function (r) {
+              return r[1];
+            })
+            .map(function (r) {
+              return (
+                '<div class="wq-row2"><span class="wq-sk">' +
+                r[0] +
+                '</span><span class="wq-sv">' +
+                r[1] +
+                '</span></div>'
+              );
+            })
+            .join('');
+        document.querySelectorAll('.wq-step').forEach(function (s) {
+          s.classList.remove('wq-on');
+        });
+        var fin = document.getElementById('wqs-final');
+        if (fin) fin.classList.add('wq-on');
+        var fill = document.getElementById('wq-fill');
+        var lbl = document.getElementById('wq-lbl');
+        if (fill) fill.style.width = '100%';
+        if (lbl) lbl.textContent = 'Complete';
+      }
+
+      // Try EmailJS first
+      if (typeof emailjs !== 'undefined' && EJ_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+        emailjs.init(EJ_KEY);
+        emailjs.send(EJ_SERVICE, EJ_TEMPLATE, params).then(done, done);
+      } else if (EJ_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+        // Load EmailJS then send
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+        s.onload = function () {
+          emailjs.init(EJ_KEY);
+          emailjs.send(EJ_SERVICE, EJ_TEMPLATE, params).then(done, done);
+        };
+        s.onerror = done;
+        document.head.appendChild(s);
+      } else {
+        // Fallback: mailto
+        var sub = encodeURIComponent('Wove Custom Design — ' + A.name);
+        var body = encodeURIComponent(
+          'New Custom Design Enquiry\n\nName: ' +
+            A.name +
+            '\nEmail: ' +
+            A.email +
+            '\nPhone: ' +
+            A.phone +
+            '\n\nDesigning: ' +
+            A.design +
+            '\nVision: ' +
+            A.vision +
+            '\nMetal: ' +
+            A.metals.join(', ') +
+            '\nStone: ' +
+            A.diamond +
+            '\nTimeline: ' +
+            A.timeline +
+            '\nMeeting: ' +
+            A.meeting
+        );
+        window.location.href = 'mailto:' + TO_EMAIL + '?subject=' + sub + '&body=' + body;
+        done();
+      }
+    }
+
+    // Bind ALL triggers (current + future elements via delegation)
+    document.addEventListener('click', function (e) {
+      var t = e.target;
+      while (t && t !== document) {
+        if (t.hasAttribute && t.hasAttribute('data-wove-open')) {
+          open();
+          return;
+        }
+        t = t.parentElement;
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+
+    return {
+      open: open,
+      close: close,
+      go: go,
+      pick: pick,
+      metal: metal,
+      chkName: chkName,
+      chkContact: chkContact,
+      send: send,
+    };
+  })();
+</script>

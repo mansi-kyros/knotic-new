@@ -1,0 +1,81 @@
+{% comment %}
+  Renders product variant options
+
+  Accepts:
+  - product: {Object} product object.
+  - option: {Object} current product_option object.
+  - block: {Object} block object.
+  - picker_type: {String} type of picker to dispay
+
+
+  Usage:
+  {% render 'product-variant-options',
+    product: product,
+    option: option,
+    block: block
+    picker_type: picker_type
+  %}
+{% endcomment %}
+{%- liquid
+  assign product_form_id = 'product-form-' | append: section.id
+-%}
+
+<div class="carat-slider-wrapper">
+  <label class="form__label" for="center_diamond_carat_size">Center Diamond Carat Size</label>
+
+  {% assign diamond_carat_size = product.metafields.custom.diamond_carat_size %}
+  {% assign diamond_carat_size_step = product.metafields.custom.diamond_carat_size_step %}
+
+  {% assign carat_parts = diamond_carat_size | split: '-' %}
+
+  {% assign min_carat = option.values[0].value %}
+  {% assign max_carat = option.value.last.value %}
+
+  <div class="carat-slider-inner">
+    <span class="carat-min">{{ min_carat }} Carat</span>
+
+    <div class="carat-track-wrapper">
+      <div class="carat-dots">
+        {% assign min_val = min_carat | times: 1 %}
+        {% assign max_val = max_carat | times: 1 %}
+        {% assign step_val = diamond_carat_size_step | times: 1 %}
+
+        {% assign diff = max_val | minus: min_val %}
+        {% assign div = diff | divided_by: step_val %}
+
+        {% assign div_str = div | append: '' %}
+        {% assign div_parts = div_str | split: '.' %}
+        {% assign div_int = div_parts[0] | plus: 0 %}
+
+        {% assign dot_count = div_int | plus: 1 %}
+
+       {%- for value in option.values -%}
+          <span></span>
+        {%- endfor -%}
+      </div>
+
+      <input
+        type="range"
+        id="caratSlider"
+        min="{{ min_carat }}"
+        max="{{ max_carat }}"
+        step="{{ diamond_carat_size_step }}"
+        value="{{ min_carat }}"
+      >
+
+      <div id="caratBubble" class="carat-bubble">{{ min_carat }}</div>
+    </div>
+
+    <span class="carat-max">{{ max_carat }} Carat</span>
+  </div>
+
+  <!-- IMPORTANT: Hidden input must be INSIDE product form -->
+  <input
+    type="hidden"
+    name="properties[Center Diamond Carat Size]"
+    id="caratValue"
+    value="{{ min_carat }}"
+    form="product_form_id"
+  >
+</div>
+

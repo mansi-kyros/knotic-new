@@ -1,0 +1,241 @@
+{% liquid
+  assign section_id = 'faq-accordion-' | append: section.id
+%}
+
+{% style %}
+#{{ section_id }} {
+  padding-top: {{ section.settings.padding_top_desktop }}px;
+  padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+}
+
+@media (max-width: 749px) {
+  #{{ section_id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+}
+
+/* Wrapper */
+
+/* Title */
+#{{ section_id }} .faq-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Description */
+#{{ section_id }} .faq-description {
+  text-align: center;
+  color: #777;
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+/* Item */
+#{{ section_id }} .faq-item {
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* Details */
+#{{ section_id }} details {
+  padding: 20px 0;
+}
+
+/* Summary */
+#{{ section_id }} summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+#{{ section_id }} summary > * {
+  margin: 0;
+}
+
+#{{ section_id }} summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Icon */
+#{{ section_id }} summary::after {
+  content: "+";
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+
+#{{ section_id }} details[open] summary::after {
+  content: "–";
+}
+
+/* Answer (Smooth Animation) */
+#{{ section_id }} .faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: max-height 0.35s ease, padding-top 0.25s ease;
+}
+
+#{{ section_id }} details[open] .faq-answer {
+  max-height: 500px;
+  padding-top: 12px;
+}
+
+/* Mobile */
+@media (max-width: 749px) {
+  #{{ section_id }} .faq-title {
+    font-size: 26px;
+  }
+}
+{% endstyle %}
+
+<section id="{{ section_id }}">
+  <div class="faq-wrapper lr-padding">
+
+    {% if section.settings.section_title != blank %}
+      <h2 class="faq-title">{{ section.settings.section_title }}</h2>
+    {% endif %}
+
+    {% if section.settings.section_description != blank %}
+      <div class="faq-description">
+        {{ section.settings.section_description }}
+      </div>
+    {% endif %}
+
+    {% for block in section.blocks %}
+      <div class="faq-item" {{ block.shopify_attributes }}>
+        <details class="faq-details">
+          <summary>{{ block.settings.question }}</summary>
+          <div class="faq-answer">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const section = document.getElementById('{{ section_id }}');
+  if (!section) return;
+
+  const allDetails = section.querySelectorAll('.faq-details');
+
+  allDetails.forEach((details) => {
+    details.addEventListener('toggle', () => {
+      if (details.open) {
+        allDetails.forEach((other) => {
+          if (other !== details) {
+            other.removeAttribute('open');
+          }
+        });
+      }
+    });
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section description",
+      "default": "<p>Find answers to the most common questions.</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "Desktop Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+
+    {
+      "type": "header",
+      "content": "Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "question",
+          "label": "FAQ Question",
+          "default": "<p>How long will it take to get my order?</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "FAQ Answer",
+          "default": "<p>Orders typically take 5–7 business days to be delivered.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,579 @@
+<!-- sections/floating_menu.liquid -->
+
+<!-- Category Drawer -->
+<div class="category-drawer" id="CategoryDrawer">
+  {% comment %} <div class="drawer-overlay" data-action="close"></div> {% endcomment %}
+  <div class="drawer-content">
+    <div class="drawer-header-wrapper">
+      <div class="drawer-header">
+        {% comment %} <h4 class="heading_title">Shop by</h4> {% endcomment %}
+        <button class="drawer-close" data-action="close" aria-label="Close">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="14" fill="white"/>
+            <g clip-path="url(#clip0_3760_3187)">
+            <path d="M13.0934 14.0571C13.1502 14.1133 13.1502 14.2045 13.0934 14.2607L7.64221 19.6573C7.58541 19.7136 7.58541 19.8047 7.64221 19.861L8.46502 20.6756C8.52184 20.7318 8.61392 20.7318 8.67072 20.6756L14.1219 15.2789C14.1787 15.2227 14.2708 15.2227 14.3276 15.2789L19.7787 20.6756C19.8355 20.7318 19.9276 20.7318 19.9844 20.6756L20.8072 19.861C20.8641 19.8048 20.8641 19.7136 20.8072 19.6573L15.3561 14.2607C15.2993 14.2045 15.2993 14.1133 15.3561 14.0571L20.8072 8.66041C20.8641 8.60418 20.8641 8.513 20.8072 8.45677L19.9844 7.64218C19.9276 7.58595 19.8355 7.58595 19.7787 7.64218L14.3276 13.0388C14.2708 13.0951 14.1787 13.0951 14.1219 13.0388L8.67074 7.64218C8.61392 7.58595 8.52184 7.58595 8.46502 7.64218L7.64221 8.45677C7.58541 8.513 7.58541 8.60418 7.64221 8.66041L13.0934 14.0571Z" fill="black"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_3760_3187">
+            <rect width="14" height="14" fill="white" transform="translate(7 7)"/>
+            </clipPath>
+            </defs>
+          </svg>
+        </button>
+      </div>
+      {% render 'header-search', input_id: 'Search-In-Modal', isMobile: true %}
+    </div>
+
+    <div class="drawer-inner">
+      <div class="drawer-body">
+        {% comment %}
+          <div class="category-section">
+            <h4>FEATURED</h4>
+            <ul class="category-main-panel_without_child_link_list">
+              {% for link in section.settings.menu.links %}
+                {% if link.links.size == 0 %}
+                  <li class="category-main-panel_without_child_link_list_item">
+                    <a
+                      class="{% if link.current %}active{% endif %}"
+                      href="{{ link.url }}"
+                      {% if link.current %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      {% assign menu_title = link.title | downcase | replace: ' ', '-' %}
+                      {% render 'floating_menu_images', menu_title: menu_title -%}
+                      <span> {{ link.title }}</span>
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endcomment %}
+        <div class="main-catagory">
+          <ul class="category-main-panel__list">
+            {% for link in section.settings.menu.links %}
+              {% assign main_menu_title = link.title | downcase | replace: ' ', '-' %}
+              {% if link.links.size == 0 %}
+                {% assign menu_title = link.title | downcase | replace: ' ', '-' %}
+                <li
+                  class="category-main-panel__item {% if forloop.index == 1 %}active{% endif %}"
+                  data-title="category-panel-{{ link.title | downcase | replace: ' ', '-' }}"
+                >
+                  <a
+                    class=""
+                    href="{{ link.url }}"
+                    {% if link.current %}
+                      aria-current="page"
+                    {% endif %}
+                  >
+                    {% render 'floating_menu_images', menu_title: main_menu_title -%}
+                    <span class="category-main-panel__title">{{ link.title }}</span>
+                  </a>
+                </li>
+              {% else %}
+                <li
+                  class="category-main-panel__item {% if forloop.first %}active{% endif %}"
+                  data-title="category-panel-{{ link.title | downcase | replace: ' ', '-' }}"
+                >
+                  {% render 'floating_menu_images', menu_title: main_menu_title -%}
+                  <span class="category-main-panel__title">{{ link.title }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="category-child-panel">
+          {% for link in section.settings.menu.links %}
+            {% if link.links.size > 0 %}
+              <div
+                class="category-child-panel__item {% if forloop.first %}active{% endif %}"
+                data-title="category-panel-{{ link.title | downcase | replace: ' ', '-' }}"
+              >
+                {% assign main_menu_title = link.title | downcase | replace: ' ', '-' %}
+                <div class="category-child-panel__sub-item swiper">
+                  <ul class="category-child-panel__sub-item-ul">
+                    {% for childlink in link.links %}
+                      {% assign main_menu_title = childlink.title | downcase | replace: ' ', '-' %}
+                      <li class="category-child-panel__sub-item-li {% if forloop.index == 1 %}sub-active{%endif %}">
+                        <div class="category-child-panel__sub-item-inner">
+                          <h4 class="category-child-panel__item-main-title">
+                            {% render 'floating_menu_images', menu_title: main_menu_title -%}
+                            <span>{{ childlink.title }}</span>
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M5.86426 13.75L12 7.83398L18.1367 13.75L16.667 15.167L12.416 11.0684L12 10.666L7.33399 15.167L5.86426 13.75Z" fill="black"/>
+                            </svg>
+                          </h4>
+                          {% if childlink.links.size > 0 %}
+                            <div class="child-link-content child-link-content-{{ main_menu_title }}">
+                              <h5>
+                                <svg
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M10 4.90721L8.42011 5.30427C7.62937 5.50286 6.91386 5.91403 6.35741 6.48961C5.80097 7.0652 5.42664 7.78135 5.27828 8.55417L5 10L4.72172 8.55417C4.57336 7.78135 4.19903 7.0652 3.64259 6.48961C3.08614 5.91403 2.37063 5.50286 1.57989 5.30427L0 4.90721L1.57989 4.51877C2.36632 4.32071 3.07853 3.91297 3.63441 3.34255C4.19029 2.77213 4.56722 2.06226 4.72172 1.29478L4.97756 0L5.23339 1.29478C5.38562 2.06366 5.76168 2.77521 6.31785 3.34669C6.87403 3.91817 7.58746 4.32611 8.37522 4.52309L10 4.90721Z" fill="#9E371E"/>
+                                </svg>
+                                <span>{{ childlink.title }}</span>
+                              </h5>
+                              {% assign childlink_title = childlink.title | downcase | replace: ' ', '-' %}
+                              <ul class="category-grandchild-panel__sub-list {% if childlink_title == 'price' %}price-child{%endif %}">
+                                {% for grandchildlink in childlink.links %}
+                                  {% assign menu_title = grandchildlink.title | downcase | replace: ' ', '-' %}
+                                  <li>
+                                    <a
+                                      class="{% if grandchildlink.current %}active{% endif %}"
+                                      href="{{ grandchildlink.url }}"
+                                      {% if grandchildlink.current %}
+                                        aria-current="page"
+                                      {% endif %}
+                                    >
+                                      {% render 'floating_menu_images', menu_title: menu_title -%}
+                                      {{ grandchildlink.title -}}
+                                    </a>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+                          {% endif %}
+                        </div>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                  {% comment %} <div class="swiper-pagination"></div> {% endcomment %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% comment %}
+  <floating-menu class="floating-menu">
+    <!-- Bottom Navigation -->
+    <nav class="floating-nav">
+      <a
+        href="{{ routes.root_url }}"
+        class="nav-item {% if request.page_type == 'index' %}active{% endif %}"
+        data-nav="home"
+      >
+        <span class="nav-icon" aria-hidden="true">
+          <svg
+            class="nav-icon-without-fill"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M10.4 17.5C10.2674 17.5 10.1402 17.5527 10.0465 17.6464C9.9527 17.7402 9.90002 17.8674 9.90002 18C9.90002 18.1326 9.9527 18.2598 10.0465 18.3536C10.1402 18.4473 10.2674 18.5 10.4 18.5H15.4C15.5326 18.5 15.6598 18.4473 15.7536 18.3536C15.8473 18.2598 15.9 18.1326 15.9 18C15.9 17.8674 15.8473 17.7402 15.7536 17.6464C15.6598 17.5527 15.5326 17.5 15.4 17.5H10.4Z" fill="black"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.069 2.575C14.4513 2.08722 13.6871 1.8219 12.9 1.8219C12.1129 1.8219 11.3488 2.08722 10.731 2.575L4.23102 7.707C3.81611 8.03463 3.4808 8.45199 3.25028 8.92776C3.01976 9.40352 2.90001 9.92533 2.90002 10.454V18.5C2.90002 19.4283 3.26877 20.3185 3.92515 20.9749C4.58153 21.6313 5.47177 22 6.40002 22H19.4C20.3283 22 21.2185 21.6313 21.8749 20.9749C22.5313 20.3185 22.9 19.4283 22.9 18.5V10.454C22.9 9.92533 22.7803 9.40352 22.5498 8.92776C22.3192 8.45199 21.9839 8.03463 21.569 7.707L15.069 2.575ZM11.351 3.36C11.7922 3.01173 12.3379 2.8223 12.9 2.8223C13.4621 2.8223 14.0078 3.01173 14.449 3.36L20.949 8.492C21.2454 8.72598 21.485 9.02406 21.6497 9.36387C21.8144 9.70368 21.9 10.0764 21.9 10.454V18.5C21.9 19.163 21.6366 19.7989 21.1678 20.2678C20.6989 20.7366 20.0631 21 19.4 21H6.40002C5.73698 21 5.1011 20.7366 4.63226 20.2678C4.16342 19.7989 3.90002 19.163 3.90002 18.5V10.454C3.89995 10.0765 3.98538 9.70381 4.14992 9.36401C4.31445 9.0242 4.55381 8.72608 4.85002 8.492L11.351 3.36Z" fill="black"/>
+          </svg>
+          <svg
+            class="nav-icon-with-fill"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M12.8999 1.8219C13.687 1.8219 14.4511 2.0871 15.0688 2.57483L21.5688 7.70667C21.9836 8.03419 22.3188 8.45179 22.5493 8.92737C22.7798 9.40305 22.8999 9.92515 22.8999 10.4537V18.4996C22.8999 19.4279 22.5309 20.3188 21.8745 20.9752C21.2182 21.6314 20.328 21.9996 19.3999 21.9996H6.3999C5.47179 21.9996 4.58164 21.6314 3.92529 20.9752C3.26892 20.3188 2.8999 19.4279 2.8999 18.4996V10.4537C2.89993 9.92515 3.02 9.40305 3.25049 8.92737C3.481 8.45179 3.81617 8.03419 4.23096 7.70667L10.731 2.57483C11.3487 2.0871 12.1128 1.8219 12.8999 1.8219ZM10.3999 17.4996C10.2674 17.4996 10.1401 17.5525 10.0464 17.6461C9.9527 17.7398 9.9 17.8672 9.8999 17.9996C9.8999 18.1322 9.95273 18.2594 10.0464 18.3531C10.1402 18.4469 10.2673 18.4996 10.3999 18.4996H15.3999C15.5325 18.4996 15.6596 18.4469 15.7534 18.3531C15.8471 18.2594 15.8999 18.1322 15.8999 17.9996C15.8998 17.8672 15.8471 17.7398 15.7534 17.6461C15.6597 17.5525 15.5324 17.4996 15.3999 17.4996H10.3999Z" fill="black"/>
+          </svg>
+        </span>
+        <span class="nav-label">Home</span>
+      </a>
+      <button class="nav-item" data-nav="category">
+        <span class="nav-icon" aria-hidden="true">
+          <svg
+            class="nav-icon-without-fill"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M10.075 2.25H4.82495C4.32785 2.2506 3.85129 2.44833 3.49978 2.79983C3.14828 3.15133 2.95055 3.6279 2.94995 4.125V9.375C2.95055 9.8721 3.14828 10.3487 3.49978 10.7002C3.85129 11.0517 4.32785 11.2494 4.82495 11.25H10.075C10.572 11.2494 11.0486 11.0517 11.4001 10.7002C11.7516 10.3487 11.9494 9.8721 11.95 9.375V4.125C11.9494 3.6279 11.7516 3.15133 11.4001 2.79983C11.0486 2.44833 10.572 2.2506 10.075 2.25ZM11.2 9.375C11.2 9.67337 11.0814 9.95952 10.8704 10.1705C10.6595 10.3815 10.3733 10.5 10.075 10.5H4.82495C4.52658 10.5 4.24043 10.3815 4.02946 10.1705C3.81848 9.95952 3.69995 9.67337 3.69995 9.375V4.125C3.69995 3.82663 3.81848 3.54048 4.02946 3.3295C4.24043 3.11853 4.52658 3 4.82495 3H10.075C10.3733 3 10.6595 3.11853 10.8704 3.3295C11.0814 3.54048 11.2 3.82663 11.2 4.125V9.375ZM20.575 2.25H15.325C14.8279 2.2506 14.3513 2.44833 13.9998 2.79983C13.6483 3.15133 13.4505 3.6279 13.45 4.125V9.375C13.4505 9.8721 13.6483 10.3487 13.9998 10.7002C14.3513 11.0517 14.8279 11.2494 15.325 11.25H20.575C21.0721 11.2494 21.5486 11.0517 21.9001 10.7002C22.2516 10.3487 22.4494 9.8721 22.45 9.375V4.125C22.4494 3.6279 22.2516 3.15133 21.9001 2.79983C21.5486 2.44833 21.0721 2.2506 20.575 2.25ZM21.7 9.375C21.7 9.67337 21.5814 9.95952 21.3704 10.1705C21.1595 10.3815 20.8733 10.5 20.575 10.5H15.325C15.0266 10.5 14.7404 10.3815 14.5295 10.1705C14.3185 9.95952 14.2 9.67337 14.2 9.375V4.125C14.2 3.82663 14.3185 3.54048 14.5295 3.3295C14.7404 3.11853 15.0266 3 15.325 3H20.575C20.8733 3 21.1595 3.11853 21.3704 3.3295C21.5814 3.54048 21.7 3.82663 21.7 4.125V9.375ZM10.075 12.75H4.82495C4.32785 12.7506 3.85129 12.9483 3.49978 13.2998C3.14828 13.6513 2.95055 14.1279 2.94995 14.625V19.875C2.95055 20.3721 3.14828 20.8487 3.49978 21.2002C3.85129 21.5517 4.32785 21.7494 4.82495 21.75H10.075C10.572 21.7494 11.0486 21.5517 11.4001 21.2002C11.7516 20.8487 11.9494 20.3721 11.95 19.875V14.625C11.9494 14.1279 11.7516 13.6513 11.4001 13.2998C11.0486 12.9483 10.572 12.7506 10.075 12.75ZM11.2 19.875C11.2 20.1734 11.0814 20.4595 10.8704 20.6705C10.6595 20.8815 10.3733 21 10.075 21H4.82495C4.52658 21 4.24043 20.8815 4.02946 20.6705C3.81848 20.4595 3.69995 20.1734 3.69995 19.875V14.625C3.69995 14.3266 3.81848 14.0405 4.02946 13.8295C4.24043 13.6185 4.52658 13.5 4.82495 13.5H10.075C10.3733 13.5 10.6595 13.6185 10.8704 13.8295C11.0814 14.0405 11.2 14.3266 11.2 14.625V19.875ZM17.95 12.75C17.0599 12.75 16.1899 13.0139 15.4499 13.5084C14.7099 14.0029 14.1331 14.7057 13.7925 15.5279C13.4519 16.3502 13.3628 17.255 13.5364 18.1279C13.7101 19.0008 14.1386 19.8026 14.768 20.432C15.3973 21.0613 16.1991 21.4899 17.072 21.6635C17.945 21.8372 18.8498 21.7481 19.672 21.4075C20.4943 21.0669 21.1971 20.4901 21.6916 19.7501C22.186 19.01 22.45 18.14 22.45 17.25C22.4487 16.0569 21.9741 14.9131 21.1305 14.0694C20.2869 13.2258 19.143 12.7513 17.95 12.75ZM17.95 21C17.2083 21 16.4832 20.7801 15.8666 20.368C15.2499 19.956 14.7692 19.3703 14.4854 18.6851C14.2016 17.9998 14.1273 17.2458 14.272 16.5184C14.4167 15.791 14.7739 15.1228 15.2983 14.5984C15.8227 14.0739 16.4909 13.7168 17.2184 13.5721C17.9458 13.4274 18.6998 13.5016 19.385 13.7855C20.0702 14.0693 20.6559 14.5499 21.068 15.1666C21.48 15.7833 21.7 16.5083 21.7 17.25C21.6989 18.2442 21.3034 19.1974 20.6004 19.9004C19.8974 20.6035 18.9442 20.9989 17.95 21Z" fill="black" stroke="black" stroke-width="0.3"/>
+          </svg>
+          <svg
+            class="nav-icon-with-fill"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M10.075 2.25H4.82495C4.32785 2.2506 3.85129 2.44833 3.49978 2.79983C3.14828 3.15133 2.95055 3.6279 2.94995 4.125V9.375C2.95055 9.8721 3.14828 10.3487 3.49978 10.7002C3.85129 11.0517 4.32785 11.2494 4.82495 11.25H10.075C10.572 11.2494 11.0486 11.0517 11.4001 10.7002C11.7516 10.3487 11.9494 9.8721 11.95 9.375V4.125C11.9494 3.6279 11.7516 3.15133 11.4001 2.79983C11.0486 2.44833 10.572 2.2506 10.075 2.25ZM20.575 2.25H15.325C14.8279 2.2506 14.3513 2.44833 13.9998 2.79983C13.6483 3.15133 13.4505 3.6279 13.45 4.125V9.375C13.4505 9.8721 13.6483 10.3487 13.9998 10.7002C14.3513 11.0517 14.8279 11.2494 15.325 11.25H20.575C21.0721 11.2494 21.5486 11.0517 21.9001 10.7002C22.2516 10.3487 22.4494 9.8721 22.45 9.375V4.125C22.4494 3.6279 22.2516 3.15133 21.9001 2.79983C21.5486 2.44833 21.0721 2.2506 20.575 2.25ZM10.075 12.75H4.82495C4.32785 12.7506 3.85129 12.9483 3.49978 13.2998C3.14828 13.6513 2.95055 14.1279 2.94995 14.625V19.875C2.95055 20.3721 3.14828 20.8487 3.49978 21.2002C3.85129 21.5517 4.32785 21.7494 4.82495 21.75H10.075C10.572 21.7494 11.0486 21.5517 11.4001 21.2002C11.7516 20.8487 11.9494 20.3721 11.95 19.875V14.625C11.9494 14.1279 11.7516 13.6513 11.4001 13.2998C11.0486 12.9483 10.572 12.7506 10.075 12.75ZM17.95 12.75C17.0599 12.75 16.1899 13.0139 15.4499 13.5084C14.7099 14.0029 14.1331 14.7057 13.7925 15.5279C13.4519 16.3502 13.3628 17.255 13.5364 18.1279C13.7101 19.0008 14.1386 19.8026 14.768 20.432C15.3973 21.0613 16.1991 21.4899 17.072 21.6635C17.945 21.8372 18.8498 21.7481 19.672 21.4075C20.4943 21.0669 21.1971 20.4901 21.6916 19.7501C22.186 19.01 22.45 18.14 22.45 17.25C22.4487 16.0569 21.9741 14.9131 21.1305 14.0694C20.2869 13.2258 19.143 12.7513 17.95 12.75Z" fill="#2F2E2C"/>
+            <path d="M10.8704 10.1705C10.6595 10.3815 10.3733 10.5 10.075 10.5H4.82495C4.52658 10.5 4.24043 10.3815 4.02946 10.1705C3.81848 9.95952 3.69995 9.67337 3.69995 9.375V4.125C3.69995 3.82663 3.81848 3.54048 4.02946 3.3295C4.24043 3.11853 4.52658 3 4.82495 3H10.075C10.3733 3 10.6595 3.11853 10.8704 3.3295C11.0814 3.54048 11.2 3.82663 11.2 4.125M20.575 10.5C20.8733 10.5 21.1595 10.3815 21.3704 10.1705C21.5814 9.95952 21.7 9.67337 21.7 9.375V4.125C21.7 3.82663 21.5814 3.54048 21.3704 3.3295C21.1595 3.11853 20.8733 3 20.575 3H15.325C15.0266 3 14.7404 3.11853 14.5295 3.3295C14.3185 3.54048 14.2 3.82663 14.2 4.125V9.375C14.2 9.67337 14.3185 9.95952 14.5295 10.1705M11.2 19.875C11.2 20.1734 11.0814 20.4595 10.8704 20.6705C10.6595 20.8815 10.3733 21 10.075 21H4.82495C4.52658 21 4.24043 20.8815 4.02946 20.6705C3.81848 20.4595 3.69995 20.1734 3.69995 19.875V14.625C3.69995 14.3266 3.81848 14.0405 4.02946 13.8295C4.24043 13.6185 4.52658 13.5 4.82495 13.5H10.075C10.3733 13.5 10.6595 13.6185 10.8704 13.8295C11.0814 14.0405 11.2 14.3266 11.2 14.625M14.272 16.5184C14.1273 17.2458 14.2016 17.9998 14.4854 18.6851C14.7692 19.3703 15.2499 19.956 15.8666 20.368C16.4832 20.7801 17.2083 21 17.95 21C18.9442 20.9989 19.8974 20.6035 20.6004 19.9004C21.3034 19.1974 21.6989 18.2442 21.7 17.25C21.7 16.5083 21.48 15.7833 21.068 15.1666C20.6559 14.5499 20.0702 14.0693 19.385 13.7855C18.6998 13.5016 17.9458 13.4274 17.2184 13.5721M10.075 2.25H4.82495C4.32785 2.2506 3.85129 2.44833 3.49978 2.79983C3.14828 3.15133 2.95055 3.6279 2.94995 4.125V9.375C2.95055 9.8721 3.14828 10.3487 3.49978 10.7002C3.85129 11.0517 4.32785 11.2494 4.82495 11.25H10.075C10.572 11.2494 11.0486 11.0517 11.4001 10.7002C11.7516 10.3487 11.9494 9.8721 11.95 9.375V4.125C11.9494 3.6279 11.7516 3.15133 11.4001 2.79983C11.0486 2.44833 10.572 2.2506 10.075 2.25ZM20.575 2.25H15.325C14.8279 2.2506 14.3513 2.44833 13.9998 2.79983C13.6483 3.15133 13.4505 3.6279 13.45 4.125V9.375C13.4505 9.8721 13.6483 10.3487 13.9998 10.7002C14.3513 11.0517 14.8279 11.2494 15.325 11.25H20.575C21.072 11.2494 21.5486 11.0517 21.9001 10.7002C22.2516 10.3487 22.4494 9.8721 22.45 9.375V4.125C22.4494 3.6279 22.2516 3.15133 21.9001 2.79983C21.5486 2.44833 21.072 2.2506 20.575 2.25ZM10.075 12.75H4.82495C4.32785 12.7506 3.85129 12.9483 3.49978 13.2998C3.14828 13.6513 2.95055 14.1279 2.94995 14.625V19.875C2.95055 20.3721 3.14828 20.8487 3.49978 21.2002C3.85129 21.5517 4.32785 21.7494 4.82495 21.75H10.075C10.572 21.7494 11.0486 21.5517 11.4001 21.2002C11.7516 20.8487 11.9494 20.3721 11.95 19.875V14.625C11.9494 14.1279 11.7516 13.6513 11.4001 13.2998C11.0486 12.9483 10.572 12.7506 10.075 12.75ZM17.95 12.75C17.0599 12.75 16.1899 13.0139 15.4499 13.5084C14.7099 14.0029 14.1331 14.7057 13.7925 15.5279C13.4519 16.3502 13.3628 17.255 13.5364 18.1279C13.7101 19.0008 14.1386 19.8026 14.768 20.432C15.3973 21.0613 16.1991 21.4899 17.072 21.6635C17.945 21.8372 18.8498 21.7481 19.672 21.4075C20.4943 21.0669 21.1971 20.4901 21.6916 19.7501C22.186 19.01 22.45 18.14 22.45 17.25C22.4487 16.0569 21.9741 14.9131 21.1305 14.0694C20.2869 13.2258 19.143 12.7513 17.95 12.75Z" stroke="#2F2E2C" stroke-width="0.2"/>
+          </svg>
+        </span>
+        <span class="nav-label">Category</span>
+      </button>
+      <button class="nav-item floating-search" data-nav="search">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2.5" y="2" width="56" height="56" rx="28" fill="#F8F3ED"/>
+            <rect x="2.5" y="2" width="56" height="56" rx="28" stroke="white" stroke-width="4"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M29.5 22C25.634 22 22.5 25.134 22.5 29C22.5 32.866 25.634 36 29.5 36C33.366 36 36.5 32.866 36.5 29C36.5 25.134 33.366 22 29.5 22ZM20.5 29C20.5 24.0294 24.5294 20 29.5 20C34.4706 20 38.5 24.0294 38.5 29C38.5 33.9706 34.4706 38 29.5 38C24.5294 38 20.5 33.9706 20.5 29Z" fill="#2F2E2C"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M34.4429 33.9429C34.8334 33.5524 35.4666 33.5524 35.8571 33.9429L40.2071 38.2929C40.5977 38.6834 40.5977 39.3166 40.2071 39.7071C39.8166 40.0977 39.1834 40.0977 38.7929 39.7071L34.4429 35.3571C34.0524 34.9666 34.0524 34.3334 34.4429 33.9429Z" fill="#2F2E2C"/>
+          </svg>
+        </span>
+      </button>
+      <button
+        href="{{ routes.cart_url }}"
+        class="nav-item {% if request.page_type == 'cart' %}active{% endif %}"
+        data-nav="cart"
+      >
+        <span class="nav-icon" aria-hidden="true">
+          <svg
+            class="nav-icon-without-fill"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_1186_4316)">
+            <g clip-path="url(#clip1_1186_4316)">
+            <g clip-path="url(#clip2_1186_4316)">
+            <path d="M20.3496 21.1048H4.18286C4.03192 21.1048 3.88854 21.0387 3.79043 20.924C3.69214 20.8084 3.64966 20.6555 3.67426 20.5058L5.8997 6.88719C5.94061 6.63467 6.16025 6.45017 6.41604 6.45342H18.0803C18.3352 6.44997 18.5545 6.63312 18.5966 6.88461L20.8659 20.5058C20.8905 20.6555 20.848 20.8084 20.7498 20.924C20.6499 21.0408 20.5032 21.107 20.3496 21.1048ZM4.79214 20.072H19.7532L17.6439 7.48099H6.84461L4.79214 20.072Z" fill="black"/>
+            <path d="M8.6849 7.49906C8.39973 7.49906 8.1685 7.26789 8.1685 6.98272V6.22628C8.1685 6.18497 8.1685 6.14624 8.1685 6.10752C8.1685 6.06879 8.1685 6.03007 8.1685 5.99134V5.82611C8.16786 5.78156 8.17396 5.73716 8.18663 5.69444C8.39766 3.59996 10.1607 2.00568 12.2657 2.00568C14.3708 2.00568 16.1338 3.59996 16.3449 5.69444C16.3574 5.73632 16.3634 5.77984 16.363 5.82353V5.98876C16.363 6.02748 16.363 6.06621 16.363 6.10494C16.363 6.14366 16.363 6.18239 16.363 6.2237V6.9569C16.363 7.24207 16.1318 7.47325 15.8466 7.47325L8.6849 7.49648V7.49906ZM9.20124 5.91389V6.06105C9.20124 6.07654 9.20124 6.09203 9.20124 6.10752C9.20124 6.12301 9.20124 6.1385 9.20124 6.15399V6.2237V6.46379L15.3302 6.44572V6.15399C15.3302 6.1385 15.3302 6.12301 15.3302 6.10752C15.3302 6.09203 15.3302 6.07654 15.3302 6.06105V5.91389C15.329 5.89842 15.329 5.88288 15.3302 5.86742C15.1993 4.27501 13.8687 3.04933 12.2709 3.04933C10.6731 3.04933 9.34252 4.27501 9.21157 5.86742C9.20944 5.88317 9.20598 5.89871 9.20124 5.91389Z" fill="black"/>
+            </g>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1186_4316">
+            <rect width="20.533" height="19.5063" fill="white" transform="translate(2.00024 2)"/>
+            </clipPath>
+            <clipPath id="clip1_1186_4316">
+            <rect width="20.533" height="19.5063" fill="white" transform="translate(2.00049 2)"/>
+            </clipPath>
+            <clipPath id="clip2_1186_4316">
+            <rect width="17.5557" height="19.5063" fill="white" transform="translate(3.48871 2)"/>
+            </clipPath>
+            </defs>
+          </svg>
+          <svg
+            class="nav-icon-with-fill"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_1565_705)">
+            <g clip-path="url(#clip1_1565_705)">
+            <g clip-path="url(#clip2_1565_705)">
+            <path d="M20.3494 21.1048H4.18267C4.03174 21.1048 3.88836 21.0387 3.79025 20.924C3.69196 20.8084 3.64947 20.6555 3.67407 20.5058L5.89952 6.88719C5.94042 6.63467 6.16007 6.45017 6.41586 6.45342H18.0801C18.335 6.44997 18.5544 6.63312 18.5964 6.88461L20.8657 20.5058C20.8903 20.6555 20.8479 20.8084 20.7496 20.924C20.6497 21.0408 20.503 21.107 20.3494 21.1048Z" fill="black"/>
+            <path d="M8.68466 7.49906C8.39949 7.49906 8.16826 7.26789 8.16826 6.98272V6.22628C8.16826 6.18497 8.16826 6.14624 8.16826 6.10752C8.16826 6.06879 8.16826 6.03007 8.16826 5.99134V5.82611C8.16762 5.78156 8.17371 5.73716 8.18638 5.69444C8.39742 3.59996 10.1604 2.00568 12.2655 2.00568C14.3706 2.00568 16.1336 3.59996 16.3446 5.69444C16.3571 5.73632 16.3632 5.77984 16.3627 5.82353V5.98876C16.3627 6.02748 16.3627 6.06621 16.3627 6.10494C16.3627 6.14366 16.3627 6.18239 16.3627 6.2237V6.9569C16.3627 7.24207 16.1315 7.47325 15.8463 7.47325L8.68466 7.49648V7.49906ZM9.201 5.91389V6.06105C9.201 6.07654 9.201 6.09203 9.201 6.10752C9.201 6.12301 9.201 6.1385 9.201 6.15399V6.2237V6.46379L15.33 6.44572V6.15399C15.33 6.1385 15.33 6.12301 15.33 6.10752C15.33 6.09203 15.33 6.07654 15.33 6.06105V5.91389C15.3287 5.89842 15.3287 5.88288 15.33 5.86742C15.1991 4.27501 13.8684 3.04933 12.2707 3.04933C10.6729 3.04933 9.34228 4.27501 9.21133 5.86742C9.20919 5.88317 9.20574 5.89871 9.201 5.91389Z" fill="black"/>
+            </g>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_1565_705">
+            <rect width="20.533" height="19.5063" fill="white" transform="translate(2 2)"/>
+            </clipPath>
+            <clipPath id="clip1_1565_705">
+            <rect width="20.533" height="19.5063" fill="white" transform="translate(2.00024 2)"/>
+            </clipPath>
+            <clipPath id="clip2_1565_705">
+            <rect width="17.5557" height="19.5063" fill="white" transform="translate(3.48853 2)"/>
+            </clipPath>
+            </defs>
+          </svg>
+        </span>
+        <span class="nav-label">Cart</span>
+        <span class="nav-badge" data-cart-count>{{ cart.item_count | default: 0 }}</span>
+      </button>
+      <a
+        href="https://wa.me/9558608708?text=Hi"
+        class="nav-item"
+        data-nav="whatsapp"
+      >
+        <span class="nav-icon whatsapp-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_841_3084)">
+            <g clip-path="url(#clip1_841_3084)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.64637 6.09544C8.41369 5.53819 8.23725 5.517 7.88475 5.50275C7.76475 5.49581 7.63106 5.48888 7.48275 5.48888C7.02413 5.48888 6.54469 5.62294 6.25537 5.91919C5.90287 6.279 5.02819 7.11844 5.02819 8.83969C5.02819 10.5611 6.2835 12.2259 6.45281 12.459C6.62925 12.6915 8.90025 16.2754 12.4266 17.736C15.1841 18.8788 16.0024 18.7729 16.6299 18.639C17.5468 18.4416 18.6964 17.7639 18.9857 16.9459C19.2748 16.1274 19.2748 15.429 19.1901 15.2809C19.1055 15.1328 18.8726 15.0484 18.5201 14.8718C18.1676 14.6953 16.4537 13.8488 16.1293 13.7359C15.8119 13.6161 15.5087 13.6584 15.2691 13.9971C14.9304 14.4698 14.5991 14.9496 14.331 15.2387C14.1195 15.4644 13.7737 15.4927 13.4846 15.3727C13.0967 15.2107 12.0107 14.8294 10.6706 13.6373C9.63375 12.7133 8.92856 11.5635 8.72419 11.2177C8.51962 10.8651 8.703 10.6603 8.86519 10.47C9.04162 10.2512 9.21075 10.0961 9.387 9.89138C9.56344 9.68681 9.66206 9.58106 9.77494 9.34106C9.89494 9.10838 9.81019 8.86837 9.72562 8.69194C9.64087 8.51512 8.93569 6.79369 8.64637 6.09544ZM11.9964 0C5.38106 0 0 5.38256 0 11.9998C0 14.6241 0.846375 17.058 2.28506 19.0333L0.78975 23.4919L5.40225 22.0178C7.29938 23.2734 9.56325 24 12.0036 24C18.6189 24 24 18.6171 24 12.0002C24 5.38294 18.6189 0.000375 12.0036 0.000375H11.9966L11.9964 0Z" fill="#67C15E"/>
+            </g>
+            </g>
+            <defs>
+            <clipPath id="clip0_841_3084">
+            <rect width="24" height="24" fill="white"/>
+            </clipPath>
+            <clipPath id="clip1_841_3084">
+            <rect width="24" height="24" fill="white"/>
+            </clipPath>
+            </defs>
+          </svg>
+        </span>
+        <span class="nav-label">Whatsapp</span>
+      </a>
+      <span class="nav-indicator"></span>
+    </nav>
+  </floating-menu>
+{% endcomment %}
+
+<script>
+  /* ============================================================
+     CATEGORY DRAWER INITIALIZER (TABS ONLY)
+     👉 Swiper + equal height logic COMMENTED
+  ============================================================ */
+  function initCategoryDrawerSystem() {
+    const mainTabs = document.querySelectorAll('.category-main-panel__item');
+    const childPanels = document.querySelectorAll('.category-child-panel__item');
+
+    if (!mainTabs.length || !childPanels.length) return;
+
+    // Reset
+    mainTabs.forEach((t) => t.classList.remove('active'));
+    childPanels.forEach((c) => c.classList.remove('visible'));
+
+    const firstTab = mainTabs[0];
+    const firstPanel = childPanels[0];
+
+    if (firstTab) firstTab.classList.add('active');
+    if (firstPanel) firstPanel.classList.add('visible');
+
+    /* ---------- EQUAL HEIGHT FIX (COMMENTED) ---------- */
+    /*
+    function equalizeSlidesHeight(wrapper) {
+      const slides = wrapper.querySelectorAll('.swiper-slide');
+      if (!slides.length) return;
+
+      let maxH = 0;
+
+      slides.forEach((slide) => {
+        slide.style.height = 'auto';
+        maxH = Math.max(maxH, slide.offsetHeight);
+      });
+
+      slides.forEach((slide) => (slide.style.height = maxH + 'px'));
+    }
+    */
+
+    /* ---------- SWIPER INIT (COMMENTED) ---------- */
+    /*
+    function initSwipersInside(panel) {
+      const sliders = panel.querySelectorAll('.category-child-panel__sub-item');
+
+      sliders.forEach((el) => {
+        if (el.dataset.swiperInit === 'true') return;
+
+        const swiper = new Swiper(el, {
+          slidesPerView: 1,
+          spaceBetween: 10,
+          observer: true,
+          observeParents: true,
+          speed: 250,
+          pagination: {
+            el: el.querySelector('.swiper-pagination'),
+            clickable: true,
+          },
+          on: {
+            init() {
+              setTimeout(() => equalizeSlidesHeight(el), 30);
+            },
+            resize() {
+              setTimeout(() => equalizeSlidesHeight(el), 30);
+            },
+          },
+        });
+
+        el.swiper = swiper;
+        el.dataset.swiperInit = 'true';
+      });
+    }
+    */
+
+    /* ---------- TAB CLICK HANDLER (NO SWIPER) ---------- */
+    mainTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const title = tab.dataset.title;
+
+        mainTabs.forEach((t) => t.classList.remove('active'));
+        childPanels.forEach((p) => p.classList.remove('visible'));
+
+        tab.classList.add('active');
+
+        const activePanel = [...childPanels].find((p) => p.dataset.title === title);
+
+        if (activePanel) {
+          activePanel.classList.add('visible');
+
+          // Swiper init intentionally disabled
+          /*
+          setTimeout(() => {
+            initSwipersInside(activePanel);
+          }, 30);
+          */
+        }
+      });
+    });
+  }
+
+  /* ============================================================
+     CATEGORY BUTTON CLICK → OPEN DRAWER
+  ============================================================ */
+  document.addEventListener(
+    'pointerdown',
+    function (e) {
+      const categoryBtn = e.target.closest("button[data-nav='category']");
+      const headerBtn = e.target.closest('.header__icon--menu');
+
+      if (!categoryBtn && !headerBtn) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const drawer = document.getElementById('CategoryDrawer');
+      if (!drawer) return;
+
+      drawer.classList.add('active');
+      drawer.removeAttribute('aria-hidden');
+
+      document.body.classList.add('overflow-hidden');
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => {
+        if (typeof initCategoryDrawerSystem === 'function') {
+          initCategoryDrawerSystem();
+        }
+      }, 20);
+    },
+    true
+  );
+
+  /* ============================================================
+     CLOSE BUTTON HANDLER
+  ============================================================ */
+  document.addEventListener('click', function (e) {
+    const closeBtn = e.target.closest("[data-action='close']");
+    if (!closeBtn) return;
+
+    const drawer = document.getElementById('CategoryDrawer');
+    if (!drawer) return;
+
+    drawer.classList.remove('active');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    document.body.classList.remove('overflow-hidden-tablet', 'overflow-hidden');
+
+    const headerDetails = document.getElementById('Details-menu-drawer-container');
+    if (headerDetails) headerDetails.removeAttribute('open');
+
+    const headerSummary = headerDetails?.querySelector('summary');
+    if (headerSummary) headerSummary.setAttribute('aria-expanded', 'false');
+
+    const mainTabs = document.querySelectorAll('.category-main-panel__item');
+    const childPanels = document.querySelectorAll('.category-child-panel__item');
+
+    mainTabs.forEach((t) => t.classList.remove('active'));
+    childPanels.forEach((c) => c.classList.remove('visible'));
+
+    // Floating nav indicator disabled
+    /*
+    setTimeout(updateFloatingNavActive, 20);
+    */
+  });
+
+  /* ============================================================
+     CATEGORY CHILD ACCORDION (H4 TOGGLE)
+  ============================================================ */
+  document.addEventListener('click', function (e) {
+    const title = e.target.closest('.category-child-panel__item-main-title');
+    if (!title) return;
+
+    const parentLi = title.closest('.category-child-panel__sub-item-li');
+    if (!parentLi) return;
+
+    const isActive = parentLi.classList.contains('sub-active');
+
+    /* ❌ Close all open accordions (single open UX) */
+    document.querySelectorAll('.category-child-panel__sub-item-li.sub-active').forEach((item) => {
+      item.classList.remove('sub-active');
+    });
+
+    /* ✅ Toggle current */
+    if (!isActive) {
+      parentLi.classList.add('sub-active');
+    }
+  });
+
+  /* ============================================================
+     FLOATING MENU ACTIVE INDICATOR (COMMENTED)
+     👉 Because <floating-menu> HTML is commented
+  ============================================================ */
+  /*
+  function updateFloatingNavActive() {
+    const indicator = document.querySelector('floating-menu .nav-indicator');
+    const home = document.querySelector("floating-menu .nav-item[data-nav='home']");
+    const category = document.querySelector("floating-menu .nav-item[data-nav='category']");
+
+    if (!indicator || !home || !category) return;
+
+    const path = window.location.pathname;
+    const isHome = path === '/' || path === '/index';
+    const isCollection = path.includes('/collections');
+
+    home.classList.remove('active');
+    category.classList.remove('active');
+    indicator.style.opacity = '0';
+
+    setTimeout(() => {
+      if (isHome) {
+        home.classList.add('active');
+        moveIndicatorTo(home, indicator);
+      } else if (isCollection) {
+        category.classList.add('active');
+        moveIndicatorTo(category, indicator);
+      }
+    }, 50);
+  }
+
+  function moveIndicatorTo(item, indicator) {
+    const nav = item.closest('.floating-nav');
+    if (!nav) return;
+
+    const navRect = nav.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    const x =
+      itemRect.left -
+      navRect.left +
+      itemRect.width / 2 -
+      indicator.offsetWidth / 2;
+
+    indicator.style.opacity = '1';
+    indicator.style.transform = `translateX(${x}px)`;
+  }
+
+  document.addEventListener('DOMContentLoaded', updateFloatingNavActive);
+  */
+</script>
+
+{% schema %}
+{
+  "name": "Floating Menu",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Floating Mobile Menu"
+    }
+  ]
+}
+{% endschema %}

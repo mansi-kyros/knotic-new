@@ -1,0 +1,505 @@
+variant-selects {
+  display: block;
+}
+
+.product--no-media .product-form__input--pill,
+.product--no-media .product-form__input--swatch,
+.product--no-media .product-form__input--dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.product--no-media .product-form__input.product-form__input--pill,
+.product--no-media .product-form__input.product-form__input--swatch {
+  flex-wrap: wrap;
+  margin: 0 auto 1.2rem auto;
+}
+
+.product--no-media .product-form__input--dropdown {
+  flex-direction: column;
+  max-width: 100%;
+}
+
+:is(.product-form__input--pill, .product-form__input--swatch) .form__label {
+  margin-bottom: 0.2rem;
+}
+
+.product-form__input input[type='radio'] {
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  position: absolute;
+  height: 1px;
+  width: 1px;
+}
+
+.product-form__input input[type='radio']:not(.disabled):not(.visually-disabled)+label>.label-unavailable {
+  display: none;
+}
+
+.product-form__input--dropdown {
+  --swatch-input--size: 2rem;
+  margin-bottom: 1.6rem;
+}
+
+.product-form__input--dropdown .dropdown-swatch+select {
+  padding-left: calc(2.4rem + var(--swatch-input--size));
+}
+
+.product-form__input--dropdown .dropdown-swatch {
+  position: absolute;
+  left: 1.6rem;
+  top: calc(50% - var(--swatch-input--size) / 2);
+  width: var(--swatch-input--size);
+  height: var(--swatch-input--size);
+  z-index: 1;
+}
+
+/* Custom styles for Pill display type */
+.product-form__input--pill input[type='radio']+label {
+  border: var(--variant-pills-border-width) solid rgba(var(--color-foreground), var(--variant-pills-border-opacity));
+  background-color: rgb(var(--color-background));
+  color: rgba(var(--color-foreground));
+  border-radius: var(--variant-pills-radius);
+  color: rgb(var(--color-foreground));
+  display: inline-block;
+  margin: 0.7rem 0.5rem 0.2rem 0;
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  letter-spacing: 0.1rem;
+  line-height: 1;
+  text-align: center;
+  transition: border var(--duration-short) ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.product-form__input--pill input[type='radio']+label:before {
+  content: '';
+  position: absolute;
+  top: calc(var(--variant-pills-border-width) * -1);
+  right: calc(var(--variant-pills-border-width) * -1);
+  bottom: calc(var(--variant-pills-border-width) * -1);
+  left: calc(var(--variant-pills-border-width) * -1);
+  z-index: -1;
+  border-radius: var(--variant-pills-radius);
+  box-shadow: var(--variant-pills-shadow-horizontal-offset) var(--variant-pills-shadow-vertical-offset) var(--variant-pills-shadow-blur-radius) rgba(var(--color-shadow), var(--variant-pills-shadow-opacity));
+}
+
+.product-form__input--pill input[type='radio']+label:hover {
+  border-color: rgb(var(--color-foreground));
+}
+
+.product-form__input--pill input[type='radio']:checked+label {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+@media screen and (forced-colors: active) {
+  .product-form__input--pill input[type='radio']:checked+label {
+    text-decoration: underline;
+  }
+
+  .product-form__input--pill input[type='radio']:focus-visible+label {
+    outline: transparent solid 1px;
+    outline-offset: 2px;
+  }
+}
+
+.product-form__input--pill input[type='radio']:checked+label::selection {
+  background-color: rgba(var(--color-background), 0.3);
+}
+
+.product-form__input--pill input[type='radio']:disabled+label,
+.product-form__input--pill input[type='radio'].disabled+label {
+  border-color: rgba(var(--color-foreground), 0.1);
+  color: rgba(var(--color-foreground), 0.6);
+  text-decoration: line-through;
+}
+
+.product-form__input--pill input[type='radio'].disabled:checked+label,
+.product-form__input--pill input[type='radio']:disabled:checked+label {
+  color: rgba(var(--color-background), 0.6);
+}
+
+.product-form__input--pill input[type='radio']:focus-visible+label {
+  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0 0.5rem rgba(var(--color-foreground), 0.55);
+}
+
+/* Fallback */
+.product-form__input--pill input[type='radio'].focused+label {
+  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0 0.5rem rgba(var(--color-foreground), 0.55);
+}
+
+/* Custom styles for Swatch display type */
+.product-form__input--swatch {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-form__input--swatch .swatch-input__input+.swatch-input__label {
+  --swatch-input--size: 3.6rem;
+
+  margin: 0.7rem 1.2rem 0.2rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .product-form__input--swatch .swatch-input__input+.swatch-input__label {
+    --swatch-input--size: 2.8rem;
+  }
+}
+
+.product-form__input--pill input[type=radio]+label {
+  border: none;
+
+}
+
+.product-form__input--pill input[type=radio]:checked+label {
+  background-color: #9E371E;
+  color: #fff
+}
+
+.variant-ring-size .product-form__input--pill-inner {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.variant-ring-size input[type=radio]+label {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 16px;
+}
+
+.product-form__input--swatch .swatch-input__input+.swatch-input__label {
+  --swatch-input--size: 3.4rem;
+}
+
+.product-form__input {
+  max-width: 100%;
+}
+
+.product-form__input {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E5E5E5;
+  margin-bottom: 20px;
+}
+
+.product__info-wrapper .price--on-sale {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+/* Varaint Slider Css */
+
+.carat-slider-wrapper {
+  margin: 25px 0;
+}
+
+.carat-slider-label {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.carat-slider-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.carat-min,
+.carat-max {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.carat-track-wrapper {
+  position: relative;
+  flex: 1;
+  height: 30px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+/* dots behind slider */
+.carat-dots {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 11;
+}
+
+.carat-dots span {
+  width: 8px;
+  height: 8px;
+  background: #9E371E;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+/* slider track */
+#caratSlider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  position: relative;
+  z-index: 5;
+  pointer-events: none;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+#caratSlider::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 50px;
+  background: #F1F1F1;
+  border: none;
+  box-shadow: none;
+}
+
+#caratSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  margin-top: -12px;
+  cursor: pointer;
+  position: relative;
+  z-index: 9;
+}
+
+/* floating bubble (centered inside thumb) */
+.carat-bubble {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #a64027;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: 0px 4px 8px 0px #00000029;
+  border: 2px solid #FFFFFF;
+}
+
+/* Diamond Custom Variant Styles */
+
+.stone-shape-wrapper {
+  margin: 25px 0;
+}
+
+.stone-shape-label {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.stone-shape-options {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.stone-shape-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.stone-shape-item input[type="radio"] {
+  display: none;
+}
+
+.stone-shape-item img {
+  width: 52px;
+  height: 52px;
+  padding: 6px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: 0.25s ease;
+}
+
+.stone-shape-item span {
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.stone-shape-item input[type="radio"]:checked+img {
+  border-color: #c16542;
+  /* Your accent color */
+  background: #fff7f4;
+  transform: scale(1.07);
+}
+
+.carat-slider-wrapper,
+.stone-shape-wrapper {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.stone-shape-item span {
+  opacity: 0;
+}
+
+.stone-shape-item.active span {
+  opacity: 1;
+}
+
+.product__info-wrapper .form__label {
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 750px) {
+  .product-form .product-form__buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .product-form .product-form__submit,
+  .product-form .shopify-payment-button {
+    width: 50%;
+    border-radius: 8px;
+  }
+}
+
+.product-form .product-form__submit,
+.product-form .shopify-payment-button {
+  border-radius: 8px;
+}
+
+
+.product-form .shopify-payment-button__button {
+  border-radius: 8px;
+}
+
+.product-form .product-form__submit.button:after,
+.product-form .shopify-payment-button__button:after {
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 750px) {
+  .stone-shape-options {
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding: 5px;
+  }
+
+  .stone-shape-options::-webkit-scrollbar {
+    display: none;
+
+  }
+}
+
+/* Ring Size Custom Styles */
+
+.ring-size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
+}
+
+.ring-size-wrapper {
+  border-top: 1px solid #E5E5E5;
+  padding-top: 20px;
+}
+
+.ring-size-item input[type=radio] {
+  display: none;
+}
+
+.ring-size-item input[type=radio]+span {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 16px;
+  color: #000;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.ring-size-item input[type=radio]:checked+span {
+  background-color: #9E371E;
+  color: #fff;
+}
+
+
+/* End custom styles for Swatch display type */
+
+/* Mobile gallery thumbnails — clean square strip with underline active state
+   (instead of Dawn's default box-shadow border), matching reference design */
+@media screen and (max-width: 749px) {
+  .thumbnail-slider .thumbnail-list.slider {
+    gap: 0.4rem;
+    padding: 0.4rem 0.5rem 0.8rem;
+  }
+
+  .thumbnail-slider .thumbnail-list__item.slider__slide {
+    width: calc(25% - 0.4rem);
+  }
+
+  .thumbnail-slider .thumbnail-list__item {
+    margin-bottom: 0.4rem;
+  }
+
+  .thumbnail-slider .thumbnail.global-media-settings img {
+    border-radius: 4px;
+  }
+
+  .thumbnail-slider .thumbnail[aria-current] {
+    box-shadow: none;
+    border-color: transparent;
+  }
+
+  .thumbnail-slider .thumbnail-list__item::after {
+    content: '';
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: -0.5rem;
+    height: 2px;
+    background: transparent;
+  }
+
+  .thumbnail-slider .thumbnail-list__item:has(.thumbnail[aria-current])::after {
+    background: rgb(var(--color-foreground));
+  }
+}

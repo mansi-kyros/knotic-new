@@ -1,0 +1,949 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_banner_PwhWpW": {
+      "type": "custom_banner",
+      "blocks": {
+        "slide_FhPQLF": {
+          "type": "slide",
+          "settings": {
+            "desktop_image": "shopify://shop_images/01-Homepage_Font_Style-01-1.webp",
+            "ipad_image": "shopify://shop_images/01-Homepage_Font_Style-01-1.webp",
+            "mobile_image": "shopify://shop_images/01-Homepage_Font_Style-01-2.webp",
+            "title": "",
+            "description": "",
+            "link": ""
+          }
+        },
+        "slide_ihNTri": {
+          "type": "slide",
+          "settings": {
+            "desktop_image": "shopify://shop_images/01-Homepage_Font_Style-01-3.webp",
+            "ipad_image": "shopify://shop_images/01-Homepage_Font_Style-01-3.webp",
+            "mobile_image": "shopify://shop_images/01-Homepage_Font_Style-01-4.webp",
+            "title": "",
+            "description": "",
+            "link": ""
+          }
+        },
+        "slide_pHTYY8": {
+          "type": "slide",
+          "settings": {
+            "desktop_image": "shopify://shop_images/01-Homepage_Font_Style-01-5.webp",
+            "ipad_image": "shopify://shop_images/01-Homepage_Font_Style-01-5.webp",
+            "mobile_image": "shopify://shop_images/01-Homepage_Font_Style-01.webp",
+            "title": "",
+            "description": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_FhPQLF",
+        "slide_ihNTri",
+        "slide_pHTYY8"
+      ],
+      "name": "Banner Swiper",
+      "settings": {
+        "section_title": "",
+        "section_description": "",
+        "section_custom_class": "",
+        "display_device": "both",
+        "effect": "slide",
+        "loop": true,
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "speed": 500,
+        "centered_slides": false,
+        "show_arrows": true,
+        "show_pagination": true,
+        "pagination_style": "bullets",
+        "arrow_background_color": "#00000080",
+        "arrow_color": "#ffffff",
+        "arrow_background_color_hover": "#ffffff",
+        "arrow_color_hover": "#000000",
+        "pagination_color": "#ffffff",
+        "pagination_active_color": "#000000"
+      }
+    },
+    "tie_knot_centered_swiper_kRGMkU": {
+      "type": "tie-knot-centered-swiper",
+      "blocks": {
+        "slide_Nw7KXj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group-3.webp",
+            "title": "Wedding Bands",
+            "button_1_text": "Shop Now",
+            "button_1_url": "",
+            "button_2_text": "Learn More",
+            "button_2_url": ""
+          }
+        },
+        "slide_cVYngC": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group-1.webp",
+            "title": "Earrings",
+            "button_1_text": "Shop Now",
+            "button_1_url": "",
+            "button_2_text": "Learn More",
+            "button_2_url": ""
+          }
+        },
+        "slide_3akn6t": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group-4.webp",
+            "title": "Men's Wedding Bands",
+            "button_1_text": "Shop Now",
+            "button_1_url": "",
+            "button_2_text": "Learn More",
+            "button_2_url": ""
+          }
+        },
+        "slide_q3cEqV": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group.webp",
+            "title": "Bracelets",
+            "button_1_text": "Shop Now",
+            "button_1_url": "",
+            "button_2_text": "Learn More",
+            "button_2_url": ""
+          }
+        },
+        "slide_iTbMN4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group-2.webp",
+            "title": "Engagement Rings",
+            "button_1_text": "Shop Now",
+            "button_1_url": "",
+            "button_2_text": "Learn More",
+            "button_2_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_Nw7KXj",
+        "slide_cVYngC",
+        "slide_3akn6t",
+        "slide_q3cEqV",
+        "slide_iTbMN4"
+      ],
+      "custom_css": [
+        "h3 {color: #000000;}"
+      ],
+      "name": "Tie Knot – Centered Swiper",
+      "settings": {
+        "title": "Tie Knot for <span style=\"color: #9e371e;\">Every Occasion</span>",
+        "description": "",
+        "padding_top": 50,
+        "padding_bottom": 0,
+        "background_color": "#ffffff"
+      }
+    },
+    "occasion_carousel_qrriEd": {
+      "type": "occasion-carousel",
+      "blocks": {
+        "slide_KtLewD": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/occ-1.jpg",
+            "image_2": "shopify://shop_images/occ-1.jpg",
+            "image_3": "shopify://shop_images/occ-1.jpg",
+            "title": "Wedding Collection",
+            "button_1_label": "Shop Now",
+            "button_1_text_color": "#ffffff",
+            "button_1_bg_color": "#000000",
+            "button_2_label": "View Lookbook",
+            "button_2_text_color": "#000000",
+            "button_2_bg_color": "#f5f5f5"
+          }
+        },
+        "slide_qFUQJg": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/occ-1.jpg",
+            "image_2": "shopify://shop_images/occ-1.jpg",
+            "image_3": "shopify://shop_images/occ-1.jpg",
+            "title": "Wedding Collection",
+            "button_1_label": "Shop Now",
+            "button_1_text_color": "#ffffff",
+            "button_1_bg_color": "#000000",
+            "button_2_label": "View Lookbook",
+            "button_2_text_color": "#000000",
+            "button_2_bg_color": "#f5f5f5"
+          }
+        },
+        "slide_4TJ8Lg": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/occ-1.jpg",
+            "image_2": "shopify://shop_images/occ-1.jpg",
+            "image_3": "shopify://shop_images/occ-1.jpg",
+            "title": "Wedding Collection",
+            "button_1_label": "Shop Now",
+            "button_1_text_color": "#ffffff",
+            "button_1_bg_color": "#000000",
+            "button_2_label": "View Lookbook",
+            "button_2_text_color": "#000000",
+            "button_2_bg_color": "#f5f5f5"
+          }
+        },
+        "slide_Fh73hE": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/occ-1.jpg",
+            "image_2": "shopify://shop_images/occ-1.jpg",
+            "image_3": "shopify://shop_images/occ-1.jpg",
+            "title": "Wedding Collection",
+            "button_1_label": "Shop Now",
+            "button_1_text_color": "#ffffff",
+            "button_1_bg_color": "#000000",
+            "button_2_label": "View Lookbook",
+            "button_2_text_color": "#000000",
+            "button_2_bg_color": "#f5f5f5"
+          }
+        },
+        "slide_PceVA7": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/occ-1.jpg",
+            "image_2": "shopify://shop_images/occ-1.jpg",
+            "image_3": "shopify://shop_images/occ-1.jpg",
+            "title": "Wedding Collection",
+            "button_1_label": "Shop Now",
+            "button_1_text_color": "#ffffff",
+            "button_1_bg_color": "#000000",
+            "button_2_label": "View Lookbook",
+            "button_2_text_color": "#000000",
+            "button_2_bg_color": "#f5f5f5"
+          }
+        },
+        "slide_QkLAc9": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/occ-1.jpg",
+            "image_2": "shopify://shop_images/occ-1.jpg",
+            "image_3": "shopify://shop_images/occ-1.jpg",
+            "title": "Wedding Collection",
+            "button_1_label": "Shop Now",
+            "button_1_text_color": "#ffffff",
+            "button_1_bg_color": "#000000",
+            "button_2_label": "View Lookbook",
+            "button_2_text_color": "#000000",
+            "button_2_bg_color": "#f5f5f5"
+          }
+        },
+        "slide_wMhmwL": {
+          "type": "slide",
+          "settings": {
+            "image_1": "shopify://shop_images/occ-1.jpg",
+            "image_2": "shopify://shop_images/occ-1.jpg",
+            "image_3": "shopify://shop_images/occ-1.jpg",
+            "title": "Wedding Collection",
+            "button_1_label": "Shop Now",
+            "button_1_text_color": "#ffffff",
+            "button_1_bg_color": "#000000",
+            "button_2_label": "View Lookbook",
+            "button_2_text_color": "#000000",
+            "button_2_bg_color": "#f5f5f5"
+          }
+        }
+      },
+      "block_order": [
+        "slide_KtLewD",
+        "slide_qFUQJg",
+        "slide_4TJ8Lg",
+        "slide_Fh73hE",
+        "slide_PceVA7",
+        "slide_QkLAc9",
+        "slide_wMhmwL"
+      ],
+      "disabled": true,
+      "name": "Occasion Carousel",
+      "settings": {
+        "width_type": "default",
+        "section_title": "Tie the Knot for Every Occasion",
+        "section_description": "<p>Discover our curated collection for your special moments</p>",
+        "pagination_color": "#000000",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "per_row_desktop": 3,
+        "gap_desktop": 50,
+        "per_row_mac": 3,
+        "gap_mac": 40,
+        "per_row_ipad_horizontal": 2,
+        "gap_ipad_horizontal": 30,
+        "per_row_ipad_vertical": 1,
+        "gap_ipad_vertical": 20,
+        "per_row_mobile": 1,
+        "gap_mobile": 20
+      }
+    },
+    "category_section_EnBNp7": {
+      "type": "category-section",
+      "blocks": {
+        "category_GTG8Fr": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/01.webp",
+            "image_mobile": "shopify://shop_images/9.webp",
+            "title": "",
+            "under_text": "Bezel",
+            "link": ""
+          }
+        },
+        "category_TUJjwF": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/2.webp",
+            "image_mobile": "shopify://shop_images/10.webp",
+            "title": "",
+            "under_text": "East West",
+            "link": ""
+          }
+        },
+        "category_JpMqmq": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/3.webp",
+            "image_mobile": "shopify://shop_images/11.webp",
+            "title": "",
+            "under_text": "Halo",
+            "link": ""
+          }
+        },
+        "category_nMethh": {
+          "type": "category",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Frame_1321315042.png",
+            "image_mobile": "shopify://shop_images/Frame_1321315042.png",
+            "title": "",
+            "under_text": "",
+            "link": ""
+          }
+        },
+        "category_UCHBHK": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/4.webp",
+            "image_mobile": "shopify://shop_images/12.webp",
+            "title": "",
+            "under_text": "Hidden  Halo",
+            "link": ""
+          }
+        },
+        "category_3FhD7p": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/5.webp",
+            "image_mobile": "shopify://shop_images/13.webp",
+            "title": "",
+            "under_text": "Pave",
+            "link": ""
+          }
+        },
+        "category_bAV4H9": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1321315078_3819fc7e-e00d-4742-b17f-f006d3314151.png",
+            "image_mobile": "shopify://shop_images/Frame_1321315078.png",
+            "title": "",
+            "under_text": "",
+            "link": ""
+          }
+        },
+        "category_QC9QHU": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/6.webp",
+            "image_mobile": "shopify://shop_images/14.webp",
+            "title": "",
+            "under_text": "Solitaire",
+            "link": ""
+          }
+        },
+        "category_YJWJVq": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/7.webp",
+            "image_mobile": "shopify://shop_images/15.webp",
+            "title": "",
+            "under_text": "Three Stone",
+            "link": ""
+          }
+        },
+        "category_achbtM": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/8.webp",
+            "image_mobile": "shopify://shop_images/16.webp",
+            "title": "",
+            "under_text": "Toi et Moi",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_GTG8Fr",
+        "category_TUJjwF",
+        "category_JpMqmq",
+        "category_nMethh",
+        "category_UCHBHK",
+        "category_3FhD7p",
+        "category_bAV4H9",
+        "category_QC9QHU",
+        "category_YJWJVq",
+        "category_achbtM"
+      ],
+      "name": "Category Section",
+      "settings": {
+        "width_type": "custom",
+        "section_title": "Shop Engagement <span class=\"body-text-span\">Rings by Setting Style</span>",
+        "section_description": "<p>Explore our handcrafted designs by category.</p>",
+        "display_device": "both",
+        "enable_swiper": true,
+        "swiper_offset_before_desktop": 0,
+        "swiper_offset_after_desktop": 0,
+        "swiper_offset_before_mac": 0,
+        "swiper_offset_after_mac": 0,
+        "swiper_offset_before_ipad_horizontal": 0,
+        "swiper_offset_after_ipad_horizontal": 0,
+        "swiper_offset_before_ipad_vertical": 0,
+        "swiper_offset_after_ipad_vertical": 0,
+        "swiper_offset_before_mobile": 0,
+        "swiper_offset_after_mobile": 0,
+        "swiper_gap_desktop": 20,
+        "swiper_gap_mac": 20,
+        "swiper_gap_ipad_horizontal": 10,
+        "swiper_gap_ipad_vertical": 10,
+        "swiper_gap_mobile": 10,
+        "swiper_pre_row_desktop": 3,
+        "swiper_pre_row_mac": 3,
+        "swiper_pre_row_ipad_horizontal": 3,
+        "swiper_pre_row_ipad_vertical": 3,
+        "swiper_pre_row_mobile": 1.5,
+        "section_padding_top_desktop": 30,
+        "section_padding_bottom_desktop": 0,
+        "section_padding_left_desktop": 0,
+        "section_padding_right_desktop": 0,
+        "section_padding_top_mac": 30,
+        "section_padding_bottom_mac": 20,
+        "section_padding_left_mac": 0,
+        "section_padding_right_mac": 0,
+        "section_padding_top_ipad_horizontal": 30,
+        "section_padding_bottom_ipad_horizontal": 20,
+        "section_padding_left_ipad_horizontal": 0,
+        "section_padding_right_ipad_horizontal": 0,
+        "section_padding_top_ipad_vertical": 30,
+        "section_padding_bottom_ipad_vertical": 20,
+        "section_padding_left_ipad_vertical": 0,
+        "section_padding_right_ipad_vertical": 0,
+        "section_padding_top_mobile": 30,
+        "section_padding_bottom_mobile": 20,
+        "section_padding_left_mobile": 0,
+        "section_padding_right_mobile": 0
+      }
+    },
+    "daimond_shap_C7aUDi": {
+      "type": "daimond_shap",
+      "blocks": {
+        "item_EF3zJc": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Round_352322de-1393-4493-8575-0229d27b0867.png",
+            "label": "Round"
+          }
+        },
+        "item_VYwPgB": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Oval_ec171b98-d538-432c-b113-3833fd10e815.png",
+            "label": "Oval"
+          }
+        },
+        "item_jFbUha": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Marquise_4cde44fa-ea6b-4222-94c3-c773f9c2d254.png",
+            "label": "Marquise"
+          }
+        },
+        "item_xnzj6E": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Emerald_41c8a581-f898-4a0c-a475-992e3a46e4a7.png",
+            "label": "Emerald"
+          }
+        },
+        "item_nKyHCn": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Radiant_6d8805dc-aa42-4b56-b8ed-b01a229cddb9.png",
+            "label": "Radiant"
+          }
+        },
+        "item_XHkLAg": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Cushion_f5a2ba6c-7698-4af9-8b54-ce297d13ac85.png",
+            "label": "Cushion"
+          }
+        },
+        "item_Pppyrx": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Pear_d6b8985b-c5c1-4b50-b413-86e577932780.png",
+            "label": "Pear"
+          }
+        },
+        "item_7YfMA4": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Princess_90e10fa0-1256-4d80-876d-7366ca4df61a.png",
+            "label": "Princess"
+          }
+        },
+        "item_iXJXTU": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Asscher_05f2e6dd-13df-4240-bae8-9956b20d8cad.png",
+            "label": "Asscher"
+          }
+        }
+      },
+      "block_order": [
+        "item_EF3zJc",
+        "item_VYwPgB",
+        "item_jFbUha",
+        "item_xnzj6E",
+        "item_nKyHCn",
+        "item_XHkLAg",
+        "item_Pppyrx",
+        "item_7YfMA4",
+        "item_iXJXTU"
+      ],
+      "name": "Diamond Shape Swiper",
+      "settings": {
+        "title": "Shop Engagement Rings  <span class=\"body-text-span\">by Diamond Shapes</span>",
+        "description": "<p>The classic shape with the 58 facet Sparkler</p>",
+        "desktop_per_row": 5,
+        "ipad_horizontal": 5,
+        "ipad_vertical": 5,
+        "mobile_per_row": 4,
+        "device_show": "both"
+      }
+    },
+    "custom_banner_with_text_MXWkYU": {
+      "type": "custom-banner-with-text",
+      "name": "Custom Banner with Text",
+      "settings": {
+        "width_type": "full_width",
+        "image_desktop": "shopify://shop_images/Setting_Section_8a92e662-7ae6-4f08-8ec2-dad46a36d28f.png",
+        "image_mobile": "shopify://shop_images/Setting_Section_mobile_c40fb001-4046-43a9-bb8e-ea8795a519cc.png",
+        "title": "The Custom Knots",
+        "description": "<p>Craft your love story into a timeless design personalize your custom knot with Knotic Jewels,where every twist and turn reflects your unique bond</p>",
+        "button_label": "Customize",
+        "button_link": "shopify://pages/custom-jewellery",
+        "text_color": "#ffffff",
+        "button_bg_color": "rgba(0,0,0,0)",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 20,
+        "show_device": "both"
+      }
+    },
+    "featured_collection_custom_QbjHMg": {
+      "type": "featured-collection-custom",
+      "name": "⚡ Featured Collection (Custom)",
+      "settings": {
+        "width_type": "custom",
+        "title": "Bestseller",
+        "description": "",
+        "collection": "home-page",
+        "products": [],
+        "products_to_show": 8,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "enable_swiper": true,
+        "banner_link": "",
+        "image_postion": "left",
+        "per_row_desktop": 4,
+        "per_row_mac": 4,
+        "per_row_ipad_horizontal": 3,
+        "per_row_ipad_vertical": 2,
+        "per_row_mobile": 2,
+        "row_gap_desktop": 20,
+        "row_gap_mac": 20,
+        "row_gap_ipad_horizontal": 15,
+        "row_gap_ipad_vertical": 15,
+        "row_gap_mobile": 10,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mac": 0,
+        "padding_bottom_mac": 0,
+        "padding_left_mac": 0,
+        "padding_right_mac": 0,
+        "padding_top_ipad_horizontal": 0,
+        "padding_bottom_ipad_horizontal": 0,
+        "padding_left_ipad_horizontal": 20,
+        "padding_right_ipad_horizontal": 20,
+        "padding_top_ipad_vertical": 0,
+        "padding_bottom_ipad_vertical": 0,
+        "padding_left_ipad_vertical": 15,
+        "padding_right_ipad_vertical": 15,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_left_mobile": 15,
+        "padding_right_mobile": 15,
+        "swiper_desktop_before_offset": 0,
+        "swiper_desktop_after_offset": 0,
+        "swiper_mac_before_offset": 0,
+        "swiper_mac_after_offset": 0,
+        "swiper_ipad_horizontal_before_offset": 0,
+        "swiper_ipad_horizontal_after_offset": 0,
+        "swiper_ipad_vertical_before_offset": 0,
+        "swiper_ipad_vertical_after_offset": 0,
+        "swiper_mobile_before_offset": 0,
+        "swiper_mobile_after_offset": 0,
+        "show_device": "desktop_only"
+      }
+    },
+    "featured_collection_custom_MtzReK": {
+      "type": "featured-collection-custom",
+      "name": "⚡ Featured Collection (Custom)",
+      "settings": {
+        "width_type": "custom",
+        "title": "Recently <span class=\"body-text-span\">View</span>",
+        "description": "",
+        "collection": "home-page",
+        "products": [],
+        "products_to_show": 8,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "enable_swiper": true,
+        "banner_link": "",
+        "image_postion": "left",
+        "per_row_desktop": 4,
+        "per_row_mac": 4,
+        "per_row_ipad_horizontal": 3,
+        "per_row_ipad_vertical": 2,
+        "per_row_mobile": 2,
+        "row_gap_desktop": 20,
+        "row_gap_mac": 20,
+        "row_gap_ipad_horizontal": 15,
+        "row_gap_ipad_vertical": 15,
+        "row_gap_mobile": 10,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 60,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mac": 35,
+        "padding_bottom_mac": 50,
+        "padding_left_mac": 0,
+        "padding_right_mac": 0,
+        "padding_top_ipad_horizontal": 30,
+        "padding_bottom_ipad_horizontal": 40,
+        "padding_left_ipad_horizontal": 20,
+        "padding_right_ipad_horizontal": 20,
+        "padding_top_ipad_vertical": 25,
+        "padding_bottom_ipad_vertical": 35,
+        "padding_left_ipad_vertical": 15,
+        "padding_right_ipad_vertical": 15,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 30,
+        "padding_left_mobile": 15,
+        "padding_right_mobile": 15,
+        "swiper_desktop_before_offset": 0,
+        "swiper_desktop_after_offset": 0,
+        "swiper_mac_before_offset": 0,
+        "swiper_mac_after_offset": 0,
+        "swiper_ipad_horizontal_before_offset": 0,
+        "swiper_ipad_horizontal_after_offset": 0,
+        "swiper_ipad_vertical_before_offset": 0,
+        "swiper_ipad_vertical_after_offset": 0,
+        "swiper_mobile_before_offset": 0,
+        "swiper_mobile_after_offset": 0,
+        "show_device": "desktop_only"
+      }
+    },
+    "featured_collection_custom_Rcfhrt": {
+      "type": "featured-collection-custom",
+      "name": "⚡ Featured Collection (Custom)",
+      "settings": {
+        "width_type": "custom",
+        "title": "Bestseller",
+        "description": "",
+        "collection": "home-page",
+        "products": [],
+        "products_to_show": 8,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "enable_swiper": false,
+        "banner_link": "",
+        "image_postion": "left",
+        "per_row_desktop": 4,
+        "per_row_mac": 4,
+        "per_row_ipad_horizontal": 3,
+        "per_row_ipad_vertical": 2,
+        "per_row_mobile": 2,
+        "row_gap_desktop": 20,
+        "row_gap_mac": 20,
+        "row_gap_ipad_horizontal": 15,
+        "row_gap_ipad_vertical": 15,
+        "row_gap_mobile": 10,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mac": 0,
+        "padding_bottom_mac": 0,
+        "padding_left_mac": 0,
+        "padding_right_mac": 0,
+        "padding_top_ipad_horizontal": 0,
+        "padding_bottom_ipad_horizontal": 0,
+        "padding_left_ipad_horizontal": 20,
+        "padding_right_ipad_horizontal": 20,
+        "padding_top_ipad_vertical": 0,
+        "padding_bottom_ipad_vertical": 0,
+        "padding_left_ipad_vertical": 15,
+        "padding_right_ipad_vertical": 15,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_left_mobile": 15,
+        "padding_right_mobile": 15,
+        "swiper_desktop_before_offset": 0,
+        "swiper_desktop_after_offset": 0,
+        "swiper_mac_before_offset": 0,
+        "swiper_mac_after_offset": 0,
+        "swiper_ipad_horizontal_before_offset": 0,
+        "swiper_ipad_horizontal_after_offset": 0,
+        "swiper_ipad_vertical_before_offset": 0,
+        "swiper_ipad_vertical_after_offset": 0,
+        "swiper_mobile_before_offset": 0,
+        "swiper_mobile_after_offset": 0,
+        "show_device": "mobile_only"
+      }
+    },
+    "featured_collection_custom_i4r44Q": {
+      "type": "featured-collection-custom",
+      "name": "⚡ Featured Collection (Custom)",
+      "settings": {
+        "width_type": "custom",
+        "title": "Recently <span class=\"body-text-span\">View</span>",
+        "description": "",
+        "collection": "home-page",
+        "products": [],
+        "products_to_show": 8,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "enable_swiper": false,
+        "banner_link": "",
+        "image_postion": "left",
+        "per_row_desktop": 4,
+        "per_row_mac": 4,
+        "per_row_ipad_horizontal": 3,
+        "per_row_ipad_vertical": 2,
+        "per_row_mobile": 2,
+        "row_gap_desktop": 20,
+        "row_gap_mac": 20,
+        "row_gap_ipad_horizontal": 15,
+        "row_gap_ipad_vertical": 15,
+        "row_gap_mobile": 10,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 60,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mac": 35,
+        "padding_bottom_mac": 50,
+        "padding_left_mac": 0,
+        "padding_right_mac": 0,
+        "padding_top_ipad_horizontal": 30,
+        "padding_bottom_ipad_horizontal": 40,
+        "padding_left_ipad_horizontal": 20,
+        "padding_right_ipad_horizontal": 20,
+        "padding_top_ipad_vertical": 25,
+        "padding_bottom_ipad_vertical": 35,
+        "padding_left_ipad_vertical": 15,
+        "padding_right_ipad_vertical": 15,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 30,
+        "padding_left_mobile": 15,
+        "padding_right_mobile": 15,
+        "swiper_desktop_before_offset": 0,
+        "swiper_desktop_after_offset": 0,
+        "swiper_mac_before_offset": 0,
+        "swiper_mac_after_offset": 0,
+        "swiper_ipad_horizontal_before_offset": 0,
+        "swiper_ipad_horizontal_after_offset": 0,
+        "swiper_ipad_vertical_before_offset": 0,
+        "swiper_ipad_vertical_after_offset": 0,
+        "swiper_mobile_before_offset": 0,
+        "swiper_mobile_after_offset": 0,
+        "show_device": "mobile_only"
+      }
+    },
+    "category_section_MGLedx": {
+      "type": "category-section",
+      "blocks": {
+        "category_6DHWjD": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/blog-1_ccf4fb63-10b3-4ec7-ae89-8cb82a051484.png",
+            "title": "",
+            "under_text": "",
+            "link": ""
+          }
+        },
+        "category_zbkK4w": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/blog-2_cf4269cb-47e1-4172-b4b9-2a710ce7d37a.png",
+            "title": "",
+            "under_text": "",
+            "link": ""
+          }
+        },
+        "category_7Hwm4K": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/blog-3_14fed44c-9831-4ae9-8020-7f38630c2db7.png",
+            "title": "",
+            "under_text": "",
+            "link": ""
+          }
+        },
+        "category_XQr3ac": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/blog-4.png",
+            "title": "",
+            "under_text": "",
+            "link": ""
+          }
+        },
+        "category_QPae6D": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/blog-5.png",
+            "title": "",
+            "under_text": "",
+            "link": ""
+          }
+        },
+        "category_zWnxzM": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/blog-6.png",
+            "title": "",
+            "under_text": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_6DHWjD",
+        "category_zbkK4w",
+        "category_7Hwm4K",
+        "category_XQr3ac",
+        "category_QPae6D",
+        "category_zWnxzM"
+      ],
+      "custom_css": [
+        ".category-section {background: #fff; box-shadow: 0px 19px 100px 0px #0000000d inset;}"
+      ],
+      "name": "Category Section",
+      "settings": {
+        "width_type": "custom",
+        "section_title": "Couple <span class=\"body-text-span\">Story</span>",
+        "section_description": "<p>Explore our handcrafted designs by category.</p>",
+        "display_device": "both",
+        "enable_swiper": true,
+        "swiper_offset_before_desktop": 0,
+        "swiper_offset_after_desktop": 0,
+        "swiper_offset_before_mac": 0,
+        "swiper_offset_after_mac": 0,
+        "swiper_offset_before_ipad_horizontal": 0,
+        "swiper_offset_after_ipad_horizontal": 0,
+        "swiper_offset_before_ipad_vertical": 0,
+        "swiper_offset_after_ipad_vertical": 0,
+        "swiper_offset_before_mobile": 0,
+        "swiper_offset_after_mobile": 0,
+        "swiper_gap_desktop": 20,
+        "swiper_gap_mac": 20,
+        "swiper_gap_ipad_horizontal": 10,
+        "swiper_gap_ipad_vertical": 10,
+        "swiper_gap_mobile": 10,
+        "swiper_pre_row_desktop": 3,
+        "swiper_pre_row_mac": 3,
+        "swiper_pre_row_ipad_horizontal": 3,
+        "swiper_pre_row_ipad_vertical": 3,
+        "swiper_pre_row_mobile": 1.5,
+        "section_padding_top_desktop": 60,
+        "section_padding_bottom_desktop": 60,
+        "section_padding_left_desktop": 0,
+        "section_padding_right_desktop": 0,
+        "section_padding_top_mac": 60,
+        "section_padding_bottom_mac": 60,
+        "section_padding_left_mac": 0,
+        "section_padding_right_mac": 0,
+        "section_padding_top_ipad_horizontal": 0,
+        "section_padding_bottom_ipad_horizontal": 0,
+        "section_padding_left_ipad_horizontal": 0,
+        "section_padding_right_ipad_horizontal": 0,
+        "section_padding_top_ipad_vertical": 0,
+        "section_padding_bottom_ipad_vertical": 0,
+        "section_padding_left_ipad_vertical": 0,
+        "section_padding_right_ipad_vertical": 0,
+        "section_padding_top_mobile": 40,
+        "section_padding_bottom_mobile": 40,
+        "section_padding_left_mobile": 0,
+        "section_padding_right_mobile": 0
+      }
+    }
+  },
+  "order": [
+    "custom_banner_PwhWpW",
+    "tie_knot_centered_swiper_kRGMkU",
+    "occasion_carousel_qrriEd",
+    "category_section_EnBNp7",
+    "daimond_shap_C7aUDi",
+    "custom_banner_with_text_MXWkYU",
+    "featured_collection_custom_QbjHMg",
+    "featured_collection_custom_MtzReK",
+    "featured_collection_custom_Rcfhrt",
+    "featured_collection_custom_i4r44Q",
+    "category_section_MGLedx"
+  ]
+}

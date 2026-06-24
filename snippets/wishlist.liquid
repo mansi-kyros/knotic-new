@@ -1,0 +1,60 @@
+<style>
+  /* Style for product display can be added based on your design requirements */
+
+  .js-wishlistBlock {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .wishlist-product__list {
+    width: calc((100% - 10px * (2 - 1)) / 2);
+  }
+  @media screen and (min-width: 750px) {
+    .wishlist-product__list {
+      width: calc((100% - 10px * (4 - 1)) / 4);
+    }
+  }
+  .c-product {
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .c-product img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+  }
+
+  .c-product img:hover {
+    transform: scale(1.03);
+  }
+
+  .c-product h3.c-product__title {
+    margin-top: 10px;
+    position: relative;
+  }
+  .js-wishlistBlock .wishlist_button_svg {
+    display: none;
+  }
+  .remove_wishlist {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #000;
+    font-size: 14px;
+    z-index: 1;
+    padding: 10px;
+  }
+</style>
+<div class="lr-padding">
+  <div class="recently-title Shiv">
+    <h2 class="title inline-richtext h2 scroll-trigger animate--slide-in"><b>Wishlist</b></h2>
+  </div>
+  <div class="js-wishlistBlock">
+    <!-- Wishlist items will be displayed here -->
+  </div>
+</div>

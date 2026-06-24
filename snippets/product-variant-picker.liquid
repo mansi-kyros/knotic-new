@@ -1,0 +1,479 @@
+{% comment %}
+  Renders product variant-picker
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant picker is associated.
+  Usage:
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+{%- unless product.has_only_default_variant -%}
+  <variant-selects
+    id="variant-selects-{{ section.id }}"
+    data-section="{{ section.id }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- for option in product.options_with_values -%}
+      {%- liquid
+        assign swatch_count = option.values | map: 'swatch' | compact | size
+        assign picker_type = block.settings.picker_type
+
+        if swatch_count > 0 and block.settings.swatch_shape != 'none'
+          if block.settings.picker_type == 'dropdown'
+            assign picker_type = 'swatch_dropdown'
+          else
+            assign picker_type = 'swatch'
+          endif
+        endif
+      -%}
+      {%- if picker_type == 'swatch' -%}
+        <fieldset class="js product-form__input product-form__input--swatch">
+          <legend class="form__label">
+            {{ option.name }}:
+            <span data-selected-value>
+              {{- option.selected_value -}}
+            </span>
+          </legend>
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
+          %}
+        </fieldset>
+      {%- elsif picker_type == 'button' -%}
+        <fieldset class="js product-form__input product-form__input--pill variant-{{ option.name | downcase | replace: ' ', '-' }}">
+          <legend class="form__label">{{ option.name }}</legend>
+          <div class="product-form__input--pill-inner">
+            {% render 'product-variant-options',
+              product: product,
+              option: option,
+              block: block,
+              picker_type: picker_type
+            %}
+          </div>
+        </fieldset>
+      {%- else -%}
+        <div class="product-form__input product-form__input--dropdown">
+          <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+            {{ option.name }}
+          </label>
+          <div class="select">
+            {%- if picker_type == 'swatch_dropdown' -%}
+              <span
+                data-selected-value
+                class="dropdown-swatch"
+              >
+                {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
+              </span>
+            {%- endif -%}
+            <select
+              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+              class="select__select"
+              name="options[{{ option.name | escape }}]"
+              form="{{ product_form_id }}"
+            >
+              {% render 'product-variant-options',
+                product: product,
+                option: option,
+                block: block,
+                picker_type: picker_type
+              %}
+            </select>
+            <span class="svg-wrapper">
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </span>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <script type="application/json" data-selected-variant>
+      {{ product.selected_or_first_available_variant | json }}
+    </script>
+  </variant-selects>
+{%- endunless -%}
+
+<div class="stone-shape-wrapper">
+  <label class="form__label">Center Stone Shape</label>
+
+  <div class="stone-shape-options">
+    <label class="stone-shape-item">
+      <input
+        type="radio"
+        name="properties[Center Stone Shape]"
+        value="Round"
+        form="product-form-{{ section.id }}"
+        checked
+      >
+      <img
+        src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/dia-round.svg?v=1763985524"
+        alt="Round"
+        width="100%"
+        height="auto"
+      >
+      <span>Round</span>
+    </label>
+
+    <label class="stone-shape-item">
+      <input
+        type="radio"
+        name="properties[Center Stone Shape]"
+        value="Oval"
+        form="product-form-{{ section.id }}"
+      >
+      <img
+        src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/dia-oval.svg?v=1764045108"
+        alt="Oval"
+        width="100%"
+        height="auto"
+      >
+      <span>Oval</span>
+    </label>
+
+    <label class="stone-shape-item">
+      <input
+        type="radio"
+        name="properties[Center Stone Shape]"
+        value="Emerald"
+        form="product-form-{{ section.id }}"
+      >
+      <img
+        src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/dia-emerald.svg?v=1764045109"
+        alt="Emerald"
+        width="100%"
+        height="auto"
+      >
+      <span>Emerald</span>
+    </label>
+
+    <label class="stone-shape-item">
+      <input
+        type="radio"
+        name="properties[Center Stone Shape]"
+        value="Cushion"
+        form="product-form-{{ section.id }}"
+      >
+      <img
+        src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/dia-cushion.svg?v=1764045109"
+        alt="Cushion"
+        width="100%"
+        height="auto"
+      >
+      <span>Cushion</span>
+    </label>
+
+    <label class="stone-shape-item">
+      <input
+        type="radio"
+        name="properties[Center Stone Shape]"
+        value="Pear"
+        form="product-form-{{ section.id }}"
+      >
+      <img
+        src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/dia-pear.svg?v=1764045108"
+        alt="Pear"
+        width="100%"
+        height="auto"
+      >
+      <span>Pear</span>
+    </label>
+
+    <label class="stone-shape-item">
+      <input
+        type="radio"
+        name="properties[Center Stone Shape]"
+        value="Marquise"
+        form="product-form-{{ section.id }}"
+      >
+      <img
+        src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/dia-marquise.svg?v=1764045109"
+        alt="Marquise"
+        width="100%"
+        height="auto"
+      >
+      <span>Marquise</span>
+    </label>
+
+    <label class="stone-shape-item">
+      <input
+        type="radio"
+        name="properties[Center Stone Shape]"
+        value="Radiant"
+        form="product-form-{{ section.id }}"
+      >
+      <img
+        src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/dia-radiant.svg?v=1764045108"
+        alt="Radiant"
+        width="100%"
+        height="auto"
+      >
+      <span>Radiant</span>
+    </label>
+
+    <label class="stone-shape-item">
+      <input
+        type="radio"
+        name="properties[Center Stone Shape]"
+        value="Princess"
+        form="product-form-{{ section.id }}"
+      >
+      <img
+        src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/dia-princess.svg?v=1764045108"
+        alt="Princess"
+        width="100%"
+        height="auto"
+      >
+      <span>Princess</span>
+    </label>
+
+    <label class="stone-shape-item">
+      <input
+        type="radio"
+        name="properties[Center Stone Shape]"
+        value="Asscher"
+        form="product-form-{{ section.id }}"
+      >
+      <img
+        src="https://cdn.shopify.com/s/files/1/0774/4104/0612/files/dia-acher.svg?v=1764045109"
+        alt="Asscher"
+        width="100%"
+        height="auto"
+      >
+      <span>Asscher</span>
+    </label>
+  </div>
+  <div class="ring-size-wrapper">
+    <label class="form__label">Select Size</label>
+    <div class="ring-size-options">
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="3"
+          form="product-form-{{ section.id }}"
+          checked
+        >
+        <span>3</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="3.5"
+          form="product-form-{{ section.id }}"
+        >
+        <span>3.5</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="4"
+          form="product-form-{{ section.id }}"
+        >
+        <span>4</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="4.5"
+          form="product-form-{{ section.id }}"
+        >
+        <span>4.5</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="5"
+          form="product-form-{{ section.id }}"
+        >
+        <span>5</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="5.5"
+          form="product-form-{{ section.id }}"
+        >
+        <span>5.5</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="6"
+          form="product-form-{{ section.id }}"
+        >
+        <span>6</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="6.5"
+          form="product-form-{{ section.id }}"
+        >
+        <span>6.5</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="7"
+          form="product-form-{{ section.id }}"
+        >
+        <span>7</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="7.5"
+          form="product-form-{{ section.id }}"
+        >
+        <span>7.5</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="8"
+          form="product-form-{{ section.id }}"
+        >
+        <span>8</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="8.5"
+          form="product-form-{{ section.id }}"
+        >
+        <span>8.5</span>
+      </label>
+
+      <label class="ring-size-item">
+        <input
+          type="radio"
+          name="properties[Ring Size]"
+          value="9"
+          form="product-form-{{ section.id }}"
+        >
+        <span>9</span>
+      </label>
+    </div>
+  </div>
+</div>
+
+{% comment %}
+  <div class="carat-slider-wrapper">
+    <label class="form__label" for="center_diamond_carat_size">Center Diamond Carat Size</label>
+
+    {% assign diamond_carat_size = product.metafields.custom.diamond_carat_size %}
+    {% assign diamond_carat_size_step = product.metafields.custom.diamond_carat_size_step %}
+
+    {% assign carat_parts = diamond_carat_size | split: '-' %}
+
+    {% assign min_carat = carat_parts[0] %}
+    {% assign max_carat = carat_parts[1] %}
+
+    <div class="carat-slider-inner">
+      <span class="carat-min">{{ min_carat }} Carat</span>
+
+      <div class="carat-track-wrapper">
+        <div class="carat-dots">
+          {% assign min_val = min_carat | times: 1 %}
+          {% assign max_val = max_carat | times: 1 %}
+          {% assign step_val = diamond_carat_size_step | times: 1 %}
+
+          {% assign diff = max_val | minus: min_val %}
+          {% assign div = diff | divided_by: step_val %}
+
+          {% assign div_str = div | append: '' %}
+          {% assign div_parts = div_str | split: '.' %}
+          {% assign div_int = div_parts[0] | plus: 0 %}
+
+          {% assign dot_count = div_int | plus: 1 %}
+
+          {%- for i in (1..dot_count) -%}
+            <span></span>
+          {%- endfor -%}
+        </div>
+
+        <input
+          type="range"
+          id="caratSlider"
+          min="{{ min_carat }}"
+          max="{{ max_carat }}"
+          step="{{ diamond_carat_size_step }}"
+          value="{{ min_carat }}"
+        >
+
+        <div id="caratBubble" class="carat-bubble">{{ min_carat }}</div>
+      </div>
+
+      <span class="carat-max">{{ max_carat }} Carat</span>
+    </div>
+
+    <!-- IMPORTANT: Hidden input must be INSIDE product form -->
+    <input
+      type="hidden"
+      name="properties[Center Diamond Carat Size]"
+      id="caratValue"
+      value="{{ min_carat }}"
+      form="product-form-{{ section.id }}"
+    >
+  </div>
+{% endcomment %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function initRadioGroup(wrapperSelector) {
+      const radios = document.querySelectorAll(`${wrapperSelector} input[type="radio"]`);
+
+      if (!radios.length) return;
+
+      function syncState() {
+        radios.forEach((radio) => {
+          const label = radio.closest('label');
+
+          // ✅ ONLY UI state (SAFE)
+          if (label) {
+            label.classList.toggle('active', radio.checked);
+          }
+        });
+      }
+
+      radios.forEach((radio) => {
+        radio.addEventListener('change', syncState);
+      });
+
+      // Ensure one default checked (UI only)
+      if (![...radios].some((r) => r.checked)) {
+        radios[0].checked = true;
+      }
+
+      syncState();
+    }
+
+    // ✅ Custom properties (NOT variants)
+    initRadioGroup('.stone-shape-options');
+    initRadioGroup('.ring-size-options');
+  });
+</script>

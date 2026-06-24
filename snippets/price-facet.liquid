@@ -1,0 +1,80 @@
+<!-- ====== TEXT INPUTS (From & To) ====== -->
+<div class="price-inputs">
+  <span class="field-currency">{{ cart.currency.symbol }}</span>
+
+  <div class="field">
+    <input
+      class="field__input price-input-min"
+      name="{{ filter.min_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
+      {% if filter.min_value.value %}
+        value="{{ filter.min_value.value | money_without_currency }}"
+      {% endif %}
+      type="text"
+      inputmode="decimal"
+      placeholder="0"
+      data-min="0"
+      data-max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+    >
+    <label class="field__label">{{ 'products.facets.from' | t }}</label>
+  </div>
+
+  <span class="field-currency">{{ cart.currency.symbol }}</span>
+
+  <div class="field">
+    <input
+      class="field__input price-input-max"
+      name="{{ filter.max_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-LTE"
+      {% if filter.max_value.value %}
+        value="{{ filter.max_value.value | money_without_currency }}"
+      {% endif %}
+      type="text"
+      inputmode="decimal"
+      placeholder="{{ filter.range_max | money_without_currency }}"
+      data-min="0"
+      data-max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+    >
+    <label class="field__label">{{ 'products.facets.to' | t }}</label>
+  </div>
+</div>
+
+<!-- ====== SLIDER UI ====== -->
+<div class="price-slider-cover">
+  <div class="price-slider-base">
+    <div class="price-slider-connects">
+      <div class="price-slider-connect"></div>
+    </div>
+
+    <div class="range-input">
+      <input
+        type="range"
+        class="range-min"
+        min="0"
+        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+        value="{{ filter.min_value.value | default: 0 | money_without_currency }}"
+        step="1"
+      >
+
+      <input
+        type="range"
+        class="range-max"
+        min="0"
+        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+        value="{{ filter.max_value.value | default: filter.range_max | money_without_currency }}"
+        step="1"
+      >
+    </div>
+  </div>
+
+  <!-- PRICE LABELS -->
+  <div class="price-slider-pips price-slider-pips-horizontal">
+    <div class="price-slider-value min-range-price">
+      ₹ {{ filter.min_value.value | default: 0 | money_without_currency }}
+    </div>
+
+    <div class="price-slider-value max-range-price">
+      ₹ {{ filter.max_value.value | default: filter.range_max | money_without_currency }}
+    </div>
+  </div>
+</div>

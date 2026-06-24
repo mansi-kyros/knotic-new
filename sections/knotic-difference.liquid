@@ -1,0 +1,218 @@
+{% style %}
+  .knotic-difference {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: #FAFAFA;
+  }
+
+  .knotic-difference__title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+
+  }
+
+  .knotic-difference__title span {
+    color: #c85c3c;
+  }
+
+  .knotic-difference__desc {
+    font-size: 14px;
+    color: #666;
+    max-width: 680px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+
+  .knotic-difference__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .knotic-difference__item {
+    text-align: center;
+  }
+
+  /* .knotic-difference__icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px dashed #d9b2a3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+  }
+
+  .knotic-difference__icon img {
+    width: 28px;
+    height: auto;
+  } */
+
+  .knotic-difference__item-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .knotic-difference__item-desc {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1024px) {
+    .knotic-difference__grid {
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .knotic-difference__grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .knotic-difference__item {
+    text-align: center;
+    display: flex;
+    gap: 5px;
+    align-items: start;
+    justify-content: start;
+    border-bottom: 0.5px solid #00000026;
+    padding-bottom: 0;
+  }
+  .knotic-difference__item-desc,
+  .knotic-difference__item-title{
+    text-align: left;
+  }
+  .knotic-difference{
+    padding-top: 30px;
+    padding-bottom: 0;
+  }
+  .knotic-difference__item-title{
+    margin-top: 10px;
+  }
+  .knotic-difference__item:last-child {
+    border-bottom: none;
+  }
+  }
+{% endstyle %}
+
+<section class="knotic-difference">
+  <div class="knotic-difference__container lr-padding">
+    {% if section.settings.title != blank %}
+      <h2 class="knotic-difference__title">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <p class="knotic-difference__desc">
+        {{ section.settings.description }}
+      </p>
+    {% endif %}
+
+    <div class="knotic-difference__grid">
+      {% for block in section.blocks %}
+        <div class="knotic-difference__item" {{ block.shopify_attributes }}>
+          {% if block.settings.icon != blank %}
+            <div class="knotic-difference__icon">
+              <img
+                src="{{ block.settings.icon | image_url: width: 100 }}"
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy"
+                width="100"
+                height="100"
+              >
+            </div>
+          {% endif %}
+          <div class="content_wrapper">
+            {% if block.settings.title != blank %}
+              <div class="knotic-difference__item-title">
+                {{ block.settings.title }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.text != blank %}
+              <div class="knotic-difference__item-desc">
+                {{ block.settings.text }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Knotic Difference",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Section Title",
+      "default": "The Kn<span>otic</span> Difference"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Quality Craftsmanship"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Knotic Difference",
+      "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }, { "type": "item" }, { "type": "item" }]
+    }
+  ]
+}
+{% endschema %}

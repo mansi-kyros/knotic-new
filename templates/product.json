@@ -1,0 +1,421 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "description",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "columns",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "featured_collection_custom_L9H6E6": {
+      "type": "featured-collection-custom",
+      "name": "⚡ Featured Collection (Custom)",
+      "settings": {
+        "width_type": "custom",
+        "title": "Same Setting With Different Shape",
+        "description": "",
+        "collection": "",
+        "products": "{{ product.metafields.custom.same_setting_with_different_shape.value }}",
+        "products_to_show": 8,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "enable_swiper": true,
+        "banner_link": "",
+        "image_postion": "left",
+        "per_row_desktop": 4,
+        "per_row_mac": 4,
+        "per_row_ipad_horizontal": 3,
+        "per_row_ipad_vertical": 2,
+        "per_row_mobile": 2,
+        "row_gap_desktop": 20,
+        "row_gap_mac": 20,
+        "row_gap_ipad_horizontal": 15,
+        "row_gap_ipad_vertical": 15,
+        "row_gap_mobile": 10,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 60,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mac": 35,
+        "padding_bottom_mac": 50,
+        "padding_left_mac": 0,
+        "padding_right_mac": 0,
+        "padding_top_ipad_horizontal": 30,
+        "padding_bottom_ipad_horizontal": 40,
+        "padding_left_ipad_horizontal": 20,
+        "padding_right_ipad_horizontal": 20,
+        "padding_top_ipad_vertical": 25,
+        "padding_bottom_ipad_vertical": 35,
+        "padding_left_ipad_vertical": 15,
+        "padding_right_ipad_vertical": 15,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 30,
+        "padding_left_mobile": 15,
+        "padding_right_mobile": 15,
+        "swiper_desktop_before_offset": 0,
+        "swiper_desktop_after_offset": 0,
+        "swiper_mac_before_offset": 0,
+        "swiper_mac_after_offset": 0,
+        "swiper_ipad_horizontal_before_offset": 0,
+        "swiper_ipad_horizontal_after_offset": 0,
+        "swiper_ipad_vertical_before_offset": 0,
+        "swiper_ipad_vertical_after_offset": 0,
+        "swiper_mobile_before_offset": 0,
+        "swiper_mobile_after_offset": 0,
+        "show_device": "both"
+      }
+    },
+    "knotic_difference_Mtnj9Q": {
+      "type": "knotic-difference",
+      "blocks": {
+        "item_nHyCPX": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/pro-usp.svg",
+            "title": "Quality Craftsmanship",
+            "text": "Artisan Mastery: Meticulously handcrafted for timeless perfection"
+          }
+        },
+        "item_R8wLe3": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/pro-usp-2.svg",
+            "title": "Premium Materials",
+            "text": "Elite Materials: Ethically sourced gems and lasting precious metals"
+          }
+        },
+        "item_V6jfeW": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/pro-usp-3.svg",
+            "title": "Customisable Design",
+            "text": "Bespoke Design: Collaborative, custom jewellery crafted for your story"
+          }
+        },
+        "item_iYADMh": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/pro-usp-4.svg",
+            "title": "Sustainability & Ethics",
+            "text": "Ethical Brilliance: Sustainable diamonds and carbon-conscious luxury"
+          }
+        },
+        "item_WtqYFc": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "icon": "shopify://shop_images/pro-usp-5.svg",
+            "title": "Philanthropic Initiatives",
+            "text": "Lorem ipsum is simply dummy text of the printing and typesetting industry."
+          }
+        }
+      },
+      "block_order": [
+        "item_nHyCPX",
+        "item_R8wLe3",
+        "item_V6jfeW",
+        "item_iYADMh",
+        "item_WtqYFc"
+      ],
+      "name": "Knotic Difference",
+      "settings": {
+        "title": "The Knotic <span>Difference</span>",
+        "description": "",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "custom_banner_with_text_7q6VRb": {
+      "type": "custom-banner-with-text",
+      "disabled": true,
+      "custom_css": [
+        ".image-banner__image {object-fit: contain; height: auto;}",
+        ".image-banner__image-wrapper {position: initial;}",
+        ".image-banner__wrapper {min-height: auto;}"
+      ],
+      "name": "Custom Banner with Text",
+      "settings": {
+        "width_type": "default",
+        "image_desktop": "shopify://shop_images/end-soon.png",
+        "image_mobile": "shopify://shop_images/end-soon-mobile.png",
+        "title": "",
+        "description": "",
+        "button_label": "Shop now",
+        "button_link": "",
+        "text_color": "#ffffff",
+        "button_bg_color": "rgba(0,0,0,0)",
+        "button_text_color": "#000000",
+        "button_border_color": "#000000",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "show_device": "both"
+      }
+    },
+    "custom_banner_with_text_R7dR4E": {
+      "type": "custom-banner-with-text",
+      "name": "Custom Banner with Text",
+      "settings": {
+        "width_type": "full_width",
+        "image_desktop": "shopify://shop_images/Setting_Section_8a92e662-7ae6-4f08-8ec2-dad46a36d28f.png",
+        "image_mobile": "shopify://shop_images/Setting_Section_mobile_c40fb001-4046-43a9-bb8e-ea8795a519cc.png",
+        "title": "The Custom Knots",
+        "description": "<p>Craft your love story into a timeless design personalize your custom knot with Knotic Jewels,where every twist and turn reflects your unique bond</p>",
+        "button_label": "Customize",
+        "button_link": "shopify://pages/custom-jewellery",
+        "text_color": "#ffffff",
+        "button_bg_color": "rgba(0,0,0,0)",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_device": "both"
+      }
+    },
+    "faq_accordion_4DQTJL": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_ayeTbk": {
+          "type": "faq",
+          "settings": {
+            "question": "<p><strong>Can any wedding band be paired with any engagement ring?</strong></p>",
+            "answer": "<p>Not always. The best pairing depends on the engagement ring’s design so both rings sit comfortably and look balanced together.</p>"
+          }
+        },
+        "faq_UAXFMT": {
+          "type": "faq",
+          "settings": {
+            "question": "<p><strong>Should the wedding band match the engagement ring exactly?</strong></p>",
+            "answer": "<p>It doesn’t have to match exactly, but it should complement the style, metal, and overall design of the engagement ring.</p>"
+          }
+        },
+        "faq_jqnWRi": {
+          "type": "faq",
+          "settings": {
+            "question": "<p><strong>Is it okay to mix metals between the engagement ring and wedding band?</strong></p>",
+            "answer": "<p>Yes, mixing metals can look stylish if done intentionally, but the tones should still feel cohesive.</p>"
+          }
+        },
+        "faq_mfJyVk": {
+          "type": "faq",
+          "settings": {
+            "question": "<p><strong>Do engagement rings and wedding bands need to sit flush together?</strong></p>",
+            "answer": "<p>Not necessarily. Some rings are designed to sit flush, while others look beautiful with a slight gap.</p>"
+          }
+        },
+        "faq_KG8ReP": {
+          "type": "faq",
+          "settings": {
+            "question": "<p><strong>Can I stack more than two rings together?</strong></p>",
+            "answer": "<p>Yes, many people stack anniversary bands or additional rings over time to create a layered look.</p>"
+          }
+        },
+        "faq_Rx8kjy": {
+          "type": "faq",
+          "settings": {
+            "question": "<p><strong>Should the wedding band be simpler than the engagement ring?</strong></p>",
+            "answer": "<p>Often yes, because a simpler band lets the engagement ring remain the main focal point.</p>"
+          }
+        },
+        "faq_iC4YBQ": {
+          "type": "faq",
+          "settings": {
+            "question": "<p><strong>Can a custom wedding band be made to match an engagement ring?</strong></p>",
+            "answer": "<p>Yes, jewelers often create custom bands designed to perfectly fit the shape and style of your engagement ring.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_ayeTbk",
+        "faq_UAXFMT",
+        "faq_jqnWRi",
+        "faq_mfJyVk",
+        "faq_KG8ReP",
+        "faq_Rx8kjy",
+        "faq_iC4YBQ"
+      ],
+      "custom_css": [
+        ".faq-answer p {color: #9e371e;}"
+      ],
+      "name": "FAQ Accordion",
+      "settings": {
+        "section_title": "Frequently Asked Questions",
+        "section_description": "",
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "featured_collection_custom_LK9BVa": {
+      "type": "featured-collection-custom",
+      "name": "⚡ Featured Collection (Custom)",
+      "settings": {
+        "width_type": "custom",
+        "title": "Same Shape With Different Setting",
+        "description": "",
+        "collection": "",
+        "products": "{{ product.metafields.custom.same_shape_with_different_setting.value }}",
+        "products_to_show": 8,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "enable_swiper": true,
+        "banner_link": "",
+        "image_postion": "left",
+        "per_row_desktop": 4,
+        "per_row_mac": 4,
+        "per_row_ipad_horizontal": 3,
+        "per_row_ipad_vertical": 2,
+        "per_row_mobile": 2,
+        "row_gap_desktop": 20,
+        "row_gap_mac": 20,
+        "row_gap_ipad_horizontal": 15,
+        "row_gap_ipad_vertical": 15,
+        "row_gap_mobile": 10,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 60,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mac": 35,
+        "padding_bottom_mac": 50,
+        "padding_left_mac": 0,
+        "padding_right_mac": 0,
+        "padding_top_ipad_horizontal": 30,
+        "padding_bottom_ipad_horizontal": 40,
+        "padding_left_ipad_horizontal": 20,
+        "padding_right_ipad_horizontal": 20,
+        "padding_top_ipad_vertical": 25,
+        "padding_bottom_ipad_vertical": 35,
+        "padding_left_ipad_vertical": 15,
+        "padding_right_ipad_vertical": 15,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 30,
+        "padding_left_mobile": 15,
+        "padding_right_mobile": 15,
+        "swiper_desktop_before_offset": 0,
+        "swiper_desktop_after_offset": 0,
+        "swiper_mac_before_offset": 0,
+        "swiper_mac_after_offset": 0,
+        "swiper_ipad_horizontal_before_offset": 0,
+        "swiper_ipad_horizontal_after_offset": 0,
+        "swiper_ipad_vertical_before_offset": 0,
+        "swiper_ipad_vertical_after_offset": 0,
+        "swiper_mobile_before_offset": 0,
+        "swiper_mobile_after_offset": 0,
+        "show_device": "both"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "featured_collection_custom_L9H6E6",
+    "knotic_difference_Mtnj9Q",
+    "custom_banner_with_text_7q6VRb",
+    "custom_banner_with_text_R7dR4E",
+    "faq_accordion_4DQTJL",
+    "featured_collection_custom_LK9BVa"
+  ]
+}

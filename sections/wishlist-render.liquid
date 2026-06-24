@@ -1,0 +1,34 @@
+<div data-wishlist-render>
+  {%- if search.performed and search.results_count > 0 -%}
+    {%- assign parsed_terms = search.terms | split: ' OR ' -%}
+    {%- assign skip_card_product_styles = false -%}
+    {%- for parsed_term in parsed_terms -%}
+      {%- assign id = parsed_term | split: 'id:' | last | times: 1 -%}
+      {%- for product in search.results -%}
+        {%- if product.id == id -%}
+          <div class="wishlist-product__list">
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: 'adapt',
+              image_shape: 'default',
+              show_secondary_image: true,
+              show_vendor: false,
+              show_rating: false,
+              skip_styles: skip_card_product_styles,
+              is_wishlist: true
+            %}
+          </div>
+          {%- assign skip_card_product_styles = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Wishlist Render",
+  "settings": []
+}
+{% endschema %}

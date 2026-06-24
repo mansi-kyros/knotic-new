@@ -1,0 +1,95 @@
+{% comment %} {% if settings.enable-wishlist %} {% endcomment %}
+<div
+  class="wishlist_button {% if is_product == true %}product-wishlist{% endif %}"
+  data-product-id="{{ product.id }}"
+  data-product-title="{{ product.title }}"
+  data-tooltip="Add to wishlist"
+  {% if is_card_drawer == true %}
+    data-product-img="{{ product.image | img_url: '' }}"
+  {% else %}
+    data-product-img="{{ product.featured_image | img_url: '' }}"
+  {% endif %}
+  {% if is_card_drawer == true %}
+    data-product-price="{{ product.original_price | money | remove_first: '' }}"
+  {% else %}
+    data-product-price="{{ product.price | money | remove_first: '' }}"
+  {% endif %}
+  data-product-url="{{ product.url }}"
+  {% if is_card_drawer == true %}
+    data-product-variant-id="{{ product.variant.id }}"
+  {% else %}
+    data-product-variant-id="{{ product.selected_or_first_available_variant.id }}"
+  {% endif %}
+>
+  <svg
+    class="wishlist_button_svg without_fill"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_1010_6)">
+    <g clip-path="url(#clip1_1010_6)">
+    <path d="M16.6877 2.37859C18.1731 2.37859 19.5903 2.98161 20.6784 4.0766C21.8725 5.27824 22.5509 6.97609 22.5401 8.73473C22.5307 10.1816 21.9542 11.7334 20.8264 13.3469C19.9542 14.5949 18.7471 15.8896 17.2388 17.1952C14.6932 19.3986 12.1925 20.8609 12.0873 20.9221C11.9893 20.9791 11.8796 21.0076 11.7701 21.0076C11.6611 21.0076 11.5522 20.9795 11.4546 20.9231C11.3486 20.8619 8.82983 19.3995 6.27493 17.196C4.76068 15.89 3.55193 14.5947 2.68235 13.346C1.55707 11.7303 0.991189 10.1762 1.0001 8.72674C1.011 7.04016 1.61508 5.45405 2.70141 4.26053C3.80607 3.04691 5.28028 2.37859 6.85255 2.37859C8.86756 2.37859 10.7098 3.50732 11.7701 5.29536C12.8304 3.50736 14.6727 2.37859 16.6877 2.37859ZM11.769 19.8592L11.7889 19.8477C12.9541 19.1499 14.5554 18.0524 16.1845 16.6793L16.5339 16.3809C17.9789 15.1301 19.1262 13.8995 19.9437 12.7299C20.9547 11.2835 21.4552 9.9362 21.4631 8.72801C21.4722 7.25311 20.9042 5.83172 19.9144 4.83574C19.0264 3.94203 17.8831 3.45557 16.6877 3.45557C15.084 3.45557 13.5792 4.35618 12.6965 5.84469L11.7701 7.40687L10.8438 5.84468C9.96109 4.35616 8.45625 3.45557 6.85255 3.45557C5.58724 3.45557 4.40086 3.99342 3.49788 4.98547C2.59273 5.97993 2.08629 7.30956 2.07709 8.73344C2.06967 9.94003 2.55948 11.2851 3.56613 12.7305C4.38023 13.8995 5.52837 15.1299 6.97833 16.3804C8.73199 17.8929 10.4933 19.1008 11.749 19.8474L11.769 19.8592Z" fill="black"></path>
+    </g>
+    </g>
+    <defs>
+    <clipPath id="clip0_1010_6">
+    <rect width="21.5398" height="19.3858" fill="white" transform="translate(1 2)"></rect>
+    </clipPath>
+    <clipPath id="clip1_1010_6">
+    <rect width="21.5402" height="18.629" fill="white" transform="translate(1 2.37859)"></rect>
+    </clipPath>
+    </defs>
+  </svg>
+  <svg
+    class="wishlist_button_svg with_fill"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_1010_14)">
+    <g clip-path="url(#clip1_1010_14)">
+    <path d="M16.6877 2.37859C18.1731 2.37859 19.5903 2.98161 20.6784 4.0766C21.8725 5.27824 22.5509 6.97609 22.5401 8.73473C22.5307 10.1816 21.9542 11.7334 20.8264 13.3469C19.9542 14.5949 18.7471 15.8896 17.2388 17.1952C14.6932 19.3986 12.1925 20.8609 12.0873 20.9221C11.9893 20.9791 11.8796 21.0076 11.7701 21.0076C11.6611 21.0076 11.5522 20.9795 11.4546 20.9231C11.3486 20.8619 8.82983 19.3995 6.27493 17.196C4.76068 15.89 3.55193 14.5947 2.68235 13.346C1.55707 11.7303 0.991189 10.1762 1.0001 8.72674C1.011 7.04016 1.61508 5.45405 2.70141 4.26053C3.80607 3.04691 5.28028 2.37859 6.85255 2.37859C8.86756 2.37859 10.7098 3.50732 11.7701 5.29536C12.8304 3.50736 14.6727 2.37859 16.6877 2.37859Z" fill="black"></path>
+    </g>
+    </g>
+    <defs>
+    <clipPath id="clip0_1010_14">
+    <rect width="21.5398" height="19.3858" fill="white" transform="translate(1 2)"></rect>
+    </clipPath>
+    <clipPath id="clip1_1010_14">
+    <rect width="21.5402" height="18.629" fill="white" transform="translate(1 2.37859)"></rect>
+    </clipPath>
+    </defs>
+  </svg>
+</div>
+<style>
+    .wishlist_button{
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    {% comment %} .wishlist_button svg path{
+      stroke: #000;
+      fill: none;
+    }
+    .wishlist_button.active svg path{
+      fill: #000;
+  } {% endcomment %}
+  .wishlist_button.active .without_fill{
+    display: none;
+  }
+  .wishlist_button .with_fill{
+    display: none;
+  }
+  .wishlist_button.active .with_fill{
+    display: block;
+  }
+</style>
+{% comment %}{% endif %} {% endcomment %}

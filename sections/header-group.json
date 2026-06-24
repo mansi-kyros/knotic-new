@@ -1,0 +1,98 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free Shipping On Orders Over 350 USD",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0"
+      ],
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-7739206a-fa70-425d-9f55-7bd3bbe027e3",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_menu_image_8UAtfC": {
+          "type": "mega_menu_image",
+          "settings": {
+            "mega_menu_image": "shopify://shop_images/menu-image.png",
+            "mega_menu_title": "Engagement Rings"
+          }
+        },
+        "mega_menu_image_xCxXf3": {
+          "type": "mega_menu_image",
+          "settings": {
+            "mega_menu_image": "shopify://shop_images/Wedding_band.png",
+            "mega_menu_title": "Wedding Bands"
+          }
+        },
+        "mega_menu_image_agGpm4": {
+          "type": "mega_menu_image",
+          "settings": {
+            "mega_menu_image": "shopify://shop_images/Fashion_Jewellery.png",
+            "mega_menu_title": "Fine Jewellery"
+          }
+        },
+        "mega_menu_image_UdAWwg": {
+          "type": "mega_menu_image",
+          "settings": {
+            "mega_menu_image": "shopify://shop_images/menu-image.png",
+            "mega_menu_title": "Education"
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_image_8UAtfC",
+        "mega_menu_image_xCxXf3",
+        "mega_menu_image_agGpm4",
+        "mega_menu_image_UdAWwg"
+      ],
+      "settings": {
+        "logo_position": "middle-left",
+        "mobile_logo_position": "left",
+        "menu": "main-menu-1",
+        "menu_type_desktop": "mega",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

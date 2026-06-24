@@ -1,0 +1,206 @@
+{% comment %}
+  WOVE Customise Banner Section
+  File: sections/wove-banner.liquid
+  Add to your homepage or any page via the Theme Customizer
+{% endcomment %}
+
+<section class="wove-banner" style="
+  background: {{ section.settings.bg_color }};
+  padding: {{ section.settings.padding_top }}px 24px {{ section.settings.padding_bottom }}px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+">
+
+  {% if section.settings.show_border %}
+    <div style="position:absolute;inset:0;border:1px solid rgba(184,150,90,0.25);pointer-events:none;"></div>
+  {% endif %}
+
+  {% if section.settings.eyebrow != blank %}
+    <p style="
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: {{ section.settings.gold_color }};
+      margin-bottom: 14px;
+    ">{{ section.settings.eyebrow }}</p>
+  {% endif %}
+
+  {% if section.settings.heading != blank %}
+    <h2 style="
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: {{ section.settings.text_color }};
+      margin-bottom: 16px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    ">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  {% if section.settings.subheading != blank %}
+    <p style="
+      font-size: 15px;
+      color: {{ section.settings.subtext_color }};
+      line-height: 1.7;
+      max-width: 460px;
+      margin: 0 auto 32px;
+    ">{{ section.settings.subheading }}</p>
+  {% endif %}
+
+  <button
+    data-wove-open
+    style="
+      background: {{ section.settings.btn_bg }};
+      color: {{ section.settings.btn_text }};
+      border: 1px solid {{ section.settings.btn_border }};
+      padding: 15px 40px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    "
+    onmouseover="this.style.opacity='0.85'"
+    onmouseout="this.style.opacity='1'"
+  >
+    {{ section.settings.cta_text | default: 'Customise Now' }}
+  </button>
+
+  {% if section.settings.trust_text != blank %}
+    <p style="
+      font-size: 11px;
+      color: {{ section.settings.subtext_color }};
+      letter-spacing: 1px;
+      margin-top: 18px;
+      opacity: 0.7;
+    ">{{ section.settings.trust_text }}</p>
+  {% endif %}
+
+</section>
+
+{% schema %}
+{
+  "name": "Wove — Customise Banner",
+  "tag": "section",
+  "class": "wove-banner-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Bespoke Fine Jewelry"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Design Something Completely Yours"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Work with a knotic designer to create a one-of-a-kind piece crafted just for you."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "Start Customising"
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Trust Note (below button)",
+      "default": "Free 30-minute design consultation · No commitment required"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F7F4EF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Color",
+      "default": "#2C2820"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext Color",
+      "default": "#6B6358"
+    },
+    {
+      "type": "color",
+      "id": "gold_color",
+      "label": "Eyebrow / Accent Color",
+      "default": "#B8965A"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg",
+      "label": "Button Background",
+      "default": "#2C2820"
+    },
+    {
+      "type": "color",
+      "id": "btn_text",
+      "label": "Button Text Color",
+      "default": "#F7F4EF"
+    },
+    {
+      "type": "color",
+      "id": "btn_border",
+      "label": "Button Border Color",
+      "default": "#2C2820"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 40,
+      "max": 160,
+      "step": 8,
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 40,
+      "max": 160,
+      "step": 8,
+      "default": 96
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show Decorative Border",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wove — Customise Banner"
+    }
+  ]
+}
+{% endschema %}

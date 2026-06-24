@@ -1,0 +1,632 @@
+{%- style -%}
+          #shopify-section-{{ section.id }} {
+            padding-top: {{ section.settings.padding_top }}px;
+            padding-bottom: {{ section.settings.padding_bottom }}px;
+            background: {{ section.settings.background_color | default: '#ffffff' }};
+          }
+          @meida screen and (max-width: 786px){
+             #shopify-section-{{ section.id }} {
+             padding-bottom: 0;
+             }
+          }
+          .tie-knot-swiper {
+            position: relative;
+            width: 100%;
+          }
+
+          .tie-knot-swiper__container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+          }
+
+          .tie-knot-swiper__slide {
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            padding: 2rem 0;
+            opacity: 0.6;
+            transform: scale(0.8) !important;
+            height: auto;
+          }
+
+          .tie-knot-swiper__slide.swiper-slide-active {
+            opacity: 1;
+            transform: scale(1) !important;
+          }
+
+          .tie-knot-swiper__slide-inner {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #fff;
+          }
+
+          .tie-knot-swiper__image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+          }
+
+          .tie-knot-swiper__content {
+           position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+          }
+
+          .tie-knot-swiper__title {
+            position: relative;
+            margin: 0 0 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: inherit;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+          }
+
+      .tie-knot-swiper__title::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 0;
+      background: currentColor;
+      opacity: 0;
+    }
+
+          .swiper-slide-active .tie-knot-swiper__title {
+            opacity: 1;
+            transform: translateY(0) translateX(-50%);
+          }
+
+          .swiper-slide-active .tie-knot-swiper__title::before {
+            opacity: 1;
+            animation: growLine 0.5s ease forwards;
+          }
+
+    @keyframes growLine {
+      0% { height: 0; }
+      100% { height: 35px; }
+    }
+
+          .tie-knot-swiper__buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+            pointer-events: none;
+            width: 100%;
+          }
+
+          .swiper-slide-active .tie-knot-swiper__buttons {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+          }
+
+          .tie-knot-swiper__button {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid currentColor;
+            border-radius: 50px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+            background: transparent;
+            text-decoration: none;
+            cursor: pointer;
+          }
+
+          .tie-knot-swiper__button--primary {
+            background: #231F20;
+            color: #fff;
+          }
+
+          .tie-knot-swiper__button--secondary {
+            background: transparent;
+            color: #231F20;
+            border: 1px solid #231F20
+          }
+
+          .tie-knot-swiper__button--primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+          }
+
+          .tie-knot-swiper__button--secondary:hover {
+            background: #231F20;
+            color: #fff;
+          }
+
+          .tie-knot-swiper__nav {
+            position: absolute;
+            top: 50%;
+            width: 44px;
+            height: 44px;
+            margin-top: -22px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          }
+
+          .tie-knot-swiper:hover .tie-knot-swiper__nav {
+            opacity: 1;
+            visibility: visible;
+          }
+
+          .tie-knot-swiper__nav--prev {
+            left: 20px;
+          }
+
+          .tie-knot-swiper__nav--next {
+            right: 20px;
+          }
+
+          .tie-knot-swiper__nav svg {
+            width: 16px;
+            height: 16px;
+          }
+
+          .tie-knot-swiper .swiper-button-next:after, .tie-knot-swiper .swiper-button-prev:after{
+              display: none !important;
+          }
+
+          .TieKnotSwiper-{{ section.id }}__header {
+          text-align: left;
+          margin-bottom: 1.5rem;
+        }
+
+        .TieKnotSwiper-{{ section.id }}__header h2 {
+          margin-top: 0 !important;
+          margin-bottom: 0.5rem;
+        }
+
+        .TieKnotSwiper-{{ section.id }}__header p {
+          font-size: clamp(14px, 1.2vw, 16px);
+          color: #666;
+          max-width: 700px;
+          margin: 0 auto;
+        }
+
+        #TieKnotSwiper-{{ section.id }} .swiper-slide{
+            width:calc((100% - 0px *(3 - 1))/3) !important
+        }
+
+          @media (max-width: 767px) {
+            .tie-knot-swiper__slide {
+              padding: 1rem 0;
+              opacity: 0.7;
+            }
+
+            .tie-knot-swiper__slide.swiper-slide-active {
+              opacity: 1;
+            }
+
+            .tie-knot-swiper__content {
+              padding: 1.5rem;
+            }
+
+            .tie-knot-swiper__title {
+              font-size: 1.25rem;
+              margin-bottom: 1rem;
+            }
+
+            .tie-knot-swiper__buttons {
+              gap: 0.75rem;
+            }
+
+            .tie-knot-swiper__nav {
+              display: none;
+            }
+            .tie-knot-swiper__slide {
+            transform: scale(0.9) !important;
+          }
+
+          .tie-knot-swiper__slide.swiper-slide-active {
+            transform: scale(1) !important;
+          }
+          .tie-knot-swiper__button{
+              font-size: 12px !important;
+              padding: 0.5rem !important;
+          }
+          #TieKnotSwiper-{{ section.id }} .swiper-slide{
+            width: calc((100% - 0px *(1.5 - 1))/1.5) !important
+        }
+          }
+
+           @media screen and (min-width: 1024px) {
+          .TieKnotSwiper-{{ section.id }}__header {
+            margin-bottom: 2.4rem;
+          }
+        }
+        .TieKnotSwiper-{{ section.id }}__header.title-with-arrows {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .TieKnotSwiper-{{ section.id }}__header .title-nav-wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+
+      .TieKnotSwiper-{{ section.id }}__header .section-heading {
+        margin: 0;
+        font-size: clamp(18px, 2vw, 22px);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .TieKnotSwiper-{{ section.id }}__header .swiper-navigation-arrows {
+        display: flex;
+        align-items: center;
+      }
+
+      .TieKnotSwiper-{{ section.id }}__header .swiper-navigation-arrows button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: #b44d2c; /* match your accent */
+        transition: transform 0.2s ease, color 0.2s ease;
+        position: initial !important;
+        width: auto;
+        height: auto;
+        margin: 0;
+      }
+
+      .TieKnotSwiper-{{ section.id }}__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #D9D9D9;
+      }
+
+      .TieKnotSwiper-{{ section.id }}__header .swiper-navigation-arrows button:hover {
+        transform: scale(1.1);
+        color: #8c3a1e;
+      }
+      .TieKnotSwiper-{{ section.id }} .swiper-button-next:after, .TieKnotSwiper-{{ section.id }} .swiper-button-prev:after{
+        display: none;
+    }
+  .tie-knot-swiper__title{
+      text-align:center;
+          position: relative;
+    left: 50%;
+    z-index: 1;
+
+  }
+    @media screen and (min-width: 767px){
+      .tie-knot-swiper__title{
+      position: absolute;
+      z-index: 1;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      }
+    }
+{%- endstyle -%}
+
+<div class="tie-knot-swiper lr-padding">
+  {% if section.settings.title != blank or section.settings.description != blank %}
+    <div class="TieKnotSwiper-{{ section.id }}__header heading_wraper">
+      {% if section.settings.title != blank %}
+        <h2>{{ section.settings.title }}</h2>
+      {% endif %}
+      <div class="swiper-navigation-arrows">
+        <button class="tie-knot-swiper__nav--prev swiper-button-prev outer-swiper-prev" aria-label="Previous">
+          <svg width="29" height="17" viewBox="0 0 29 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28.1484 8.0625C10.3636 8.0625 3.11342 8.0625 1.71146 8.0625" stroke="#9E371E" stroke-width="1.20168"/>
+            <path d="M9.52344 0.25C8.52204 2.45308 6.51924 6.2584 1.71251 8.06092C6.51924 9.86345 9.52344 15.8718 9.52344 15.8718" stroke="#9E371E" stroke-width="1.20168"/>
+          </svg>
+        </button>
+        <button class="tie-knot-swiper__nav--next swiper-button-next outer-swiper-next" aria-label="Next">
+          <svg width="30" height="17" viewBox="0 0 30 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 8.32593C18.3729 8.32593 25.8627 8.32593 27.311 8.32593" stroke="#9E371E" stroke-width="1.24141"/>
+            <path d="M19.2417 0.256836C20.2762 2.53275 22.3452 6.46389 27.3109 8.326C22.3452 10.1881 19.2417 16.3952 19.2417 16.3952" stroke="#9E371E" stroke-width="1.24141"/>
+          </svg>
+        </button>
+      </div>
+
+      {% comment %}
+        {% if section.settings.section_description != blank %}
+          <p>{{ section.settings.section_description }}</p>
+        {% endif %}
+      {% endcomment %}
+    </div>
+  {% endif %}
+
+  <div class="tie-knot-swiper__container" id="TieKnotSwiper-{{ section.id }}">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        <div class="tie-knot-swiper__slide swiper-slide" {{ block.shopify_attributes }}>
+          <div class="tie-knot-swiper__image_wrapper">
+            {%- if block.settings.title != blank -%}
+              <h3 class="tie-knot-swiper__title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+            <div class="tie-knot-swiper__slide-inner">
+              {%- if block.settings.image != blank -%}
+                {%- assign img_url = block.settings.image | image_url -%}
+                <img
+                  class="tie-knot-swiper__image"
+                  src="{{ img_url }}"
+                  srcset="
+                    {{ block.settings.image | img_url: '360x' }} 360w,
+                    {{ block.settings.image | img_url: '540x' }} 540w,
+                    {{ block.settings.image | img_url: '720x' }} 720w,
+                    {{ block.settings.image | img_url: '900x' }} 900w,
+                    {{ block.settings.image | img_url: '1080x' }} 1080w,
+                    {{ block.settings.image | img_url: '1296x' }} 1296w,
+                    {{ block.settings.image | img_url: '1512x' }} 1512w,
+                    {{ block.settings.image | img_url: '1728x' }} 1728w,
+                    {{ block.settings.image | img_url: '1944x' }} 1944w,
+                    {{ block.settings.image | img_url: '2048x' }} 2048w
+                  "
+                  sizes="(max-width: 767px) 90vw, 360px"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  {% if forloop.first %}
+                    loading="eager"
+                    fetchpriority="high"
+                  {% else %}
+                    loading="lazy"
+                  {% endif %}
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg tie-knot-swiper__image' }}
+              {%- endif -%}
+              <div class="tie-knot-swiper__content">
+                <div class="tie-knot-swiper__buttons">
+                  {%- if block.settings.button_1_text != blank -%}
+                    <a
+                      href="{{ block.settings.button_1_url | default: '#' }}"
+                      class="tie-knot-swiper__button tie-knot-swiper__button--primary"
+                    >
+                      {{ block.settings.button_1_text | escape }}
+                    </a>
+                  {%- endif -%}
+
+                  {%- if block.settings.button_2_text != blank -%}
+                    <a
+                      href="{{ block.settings.button_2_url | default: '#' }}"
+                      class="tie-knot-swiper__button tie-knot-swiper__button--secondary"
+                    >
+                      {{ block.settings.button_2_text | escape }}
+                    </a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {% comment %}
+      <button type="button" class="tie-knot-swiper__nav tie-knot-swiper__nav--prev" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button type="button" class="tie-knot-swiper__nav tie-knot-swiper__nav--next" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    {% endcomment %}
+  </div>
+</div>
+
+<script>
+  (function () {
+    const swiperSelector = '#TieKnotSwiper-{{ section.id }}';
+    let initialized = false;
+
+    function initSwiper() {
+      if (initialized) return;
+
+      const swiperEl = document.querySelector(swiperSelector);
+      if (!swiperEl) return;
+      if (swiperEl.classList.contains('swiper-initialized')) return;
+      if (typeof Swiper === 'undefined') return;
+
+      new Swiper(swiperEl, {
+        slidesPerView: 1.5,
+        centeredSlides: true,
+        spaceBetween: 0,
+        loop: true,
+        watchSlidesProgress: true,
+        grabCursor: true,
+        speed: 600,
+        mousewheel: {
+    forceToAxis: true,
+    sensitivity: 1,
+  },
+  touchReleaseOnEdges: true,
+        navigation: {
+  nextEl: swiperEl.closest('.tie-knot-swiper').querySelector('.tie-knot-swiper__nav--next'),
+  prevEl: swiperEl.closest('.tie-knot-swiper').querySelector('.tie-knot-swiper__nav--prev'),
+},
+
+        breakpoints: {
+          768: {
+            slidesPerView: 3,
+          },
+        },
+
+        on: {
+          init() {
+            swiperEl.classList.add('is-ready');
+          },
+        },
+      });
+
+      initialized = true;
+    }
+
+    // Try immediately
+    initSwiper();
+
+    // Retry until Swiper loads
+    let retryCount = 0;
+    const retry = setInterval(() => {
+      retryCount++;
+      if (typeof Swiper !== 'undefined') {
+        initSwiper();
+      }
+      if (initialized || retryCount > 20) {
+        clearInterval(retry);
+      }
+    }, 150);
+
+    // Shopify editor support
+    document.addEventListener('shopify:section:load', initSwiper);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Tie Knot Centered Swiper",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured Collections"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended size: 800x1000px"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Slide title"
+        },
+        {
+          "type": "header",
+          "content": "Button 1"
+        },
+        {
+          "type": "text",
+          "id": "button_1_text",
+          "label": "Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Link"
+        },
+        {
+          "type": "header",
+          "content": "Button 2"
+        },
+        {
+          "type": "text",
+          "id": "button_2_text",
+          "label": "Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tie Knot – Centered Swiper",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+.related-products {
+  display: block;
+}
+
+.related-products__heading {
+  margin: 0 0 3rem;
+}
+
+.related-products .grid__item {
+  width: 100%;
+  max-width: 100%;
+}
