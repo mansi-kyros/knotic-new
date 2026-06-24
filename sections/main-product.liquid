@@ -509,7 +509,7 @@
                       </svg>
                     </button>
                     <div class="accordion-content open">
-                      <div class="specs-grid-wrapper">
+                      <div class="specs-grid-wrapper accordion-content-inner">
                         <div class="specs-grid">
                           <div class="spec-card">
                             <h4 class="spec-title">Band Width</h4>
@@ -751,8 +751,12 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1 10.3812L1.62401 11L7.5 5.24426L13.3751 11L14 10.3812L7.49912 3.94426L1 10.3812Z" fill="black" stroke="black" stroke-width="0.5"></path>
                       </svg>
                     </button>
-                    <div class="accordion-content"><p>Fully insured, tracked worldwide delivery with premium handling.</p>
-                  <p>Easy 30-day returns on unworn, non-customised jewellery.</p></div>
+                    <div class="accordion-content">
+                      <div class="accordion-content-inner">
+                        <p>Fully insured, tracked worldwide delivery with premium handling.</p>
+                        <p>Easy 30-day returns on unworn, non-customised jewellery.</p>
+                      </div>
+                    </div>
                   </div>
                   <div class="accordion-item">
                     <button class="accordion-header">
@@ -768,7 +772,9 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1 10.3812L1.62401 11L7.5 5.24426L13.3751 11L14 10.3812L7.49912 3.94426L1 10.3812Z" fill="black" stroke="black" stroke-width="0.5"></path>
                       </svg>
                     </button>
-                    <div class="accordion-content">Jewellery Care Tips</div>
+                    <div class="accordion-content">
+                      <div class="accordion-content-inner">Jewellery Care Tips</div>
+                    </div>
                   </div>
                 </div>
 
@@ -821,13 +827,25 @@
                     transform: rotate(0deg);
                   }
 
+                  /* grid-rows based collapse instead of a JS-measured max-height:
+                     the browser computes the row size live every frame, so it can
+                     never "overshoot" on a first open, and several accordions can
+                     open/close at the same time and each still animates smoothly. */
                   .accordion-content {
-                    max-height: 0;
+                    display: grid;
+                    grid-template-rows: 0fr;
                     overflow: hidden;
-                    transition: max-height 0.25s ease-out;
+                    transition: grid-template-rows 0.25s ease-out;
                     border-radius: 8px;
                     font-size: 13px;
                     color: #555;
+                  }
+                  .accordion-content.open {
+                    grid-template-rows: 1fr;
+                  }
+                  .accordion-content-inner {
+                    overflow: hidden;
+                    min-height: 0;
                     padding: 0 12px;
                   }
                   .shipping-return p {
@@ -1143,46 +1161,17 @@
                 </style>
 
                 <script defer>
+                  // height comes from CSS (grid-template-rows 0fr/1fr), not a
+                  // JS-measured pixel value — so every open/close, including
+                  // several at once, animates smoothly with no overshoot.
                   function openAccordion(header, content) {
                     header.classList.add('active');
                     content.classList.add('open');
-                    // force a fresh layout before measuring — without this the very
-                    // first open can read a stale scrollHeight (e.g. while a webfont
-                    // is still swapping in or another accordion is mid-collapse from
-                    // the "close all other" step below), causing it to overshoot.
-                    // A second open/close is correct because layout has settled by then.
-                    void content.offsetHeight;
-                    content.style.maxHeight = content.scrollHeight + 'px';
                   }
 
                   function closeAccordion(header, content) {
                     header.classList.remove('active');
-                    content.style.maxHeight = null;
                     content.classList.remove('open');
-                  }
-
-                  // closes a sibling accordion with NO transition. Used when opening a
-                  // *different* item: if the previously-open one (e.g. "Know Your
-                  // Setting", which is open by default on page load) collapses with its
-                  // own animation at the same time the clicked one expands, the page
-                  // shifts up from above while the new content grows from below — that
-                  // combined motion is what made the very first open look like it
-                  // "overshoots". Closing it instantly removes that competing animation,
-                  // so only the newly-opened accordion is ever seen animating.
-                  function closeAccordionInstant(header, content) {
-                    const previousTransition = content.style.transition;
-                    content.style.transition = 'none';
-                    header.classList.remove('active');
-                    content.style.maxHeight = null;
-                    content.classList.remove('open');
-                    void content.offsetHeight;
-                    content.style.transition = previousTransition;
-                  }
-
-                  function refreshOpenAccordionHeights() {
-                    document.querySelectorAll('.accordion-content.open').forEach((content) => {
-                      content.style.maxHeight = content.scrollHeight + 'px';
-                    });
                   }
 
                   document.addEventListener('click', (e) => {
@@ -1190,32 +1179,17 @@
                     if (!header) return;
 
                     const content = header.nextElementSibling;
-
                     const isOpen = header.classList.contains('active');
 
-                    // close all other — instantly, so they don't visually compete
-                    // with the accordion the user actually clicked to open
+                    // close all other
                     document.querySelectorAll('.accordion-content.open').forEach((el) => {
-                      if (el !== content) closeAccordionInstant(el.previousElementSibling, el);
+                      if (el !== content) closeAccordion(el.previousElementSibling, el);
                     });
 
                     // toggle
                     if (!isOpen) openAccordion(header, content);
                     else closeAccordion(header, content);
                   });
-
-                  // FIX iOS
-                  document.querySelectorAll('.accordion-content img').forEach((img) => {
-                    img.addEventListener('load', refreshOpenAccordionHeights);
-                  });
-
-                  // re-measure once webfonts finish swapping in and once the full
-                  // page (images included) has loaded — covers the case where the
-                  // first open's height was computed against not-yet-final layout.
-                  if (document.fonts && document.fonts.ready) {
-                    document.fonts.ready.then(refreshOpenAccordionHeights);
-                  }
-                  window.addEventListener('load', refreshOpenAccordionHeights);
 
                   /* 🔥 OPEN FIRST ACCORDION BY DEFAULT */
                   document.addEventListener('DOMContentLoaded', () => {
@@ -1225,8 +1199,6 @@
                     if (firstHeader && firstContent) {
                       firstHeader.classList.add('active');
                       firstContent.classList.add('open');
-                      void firstContent.offsetHeight;
-                      firstContent.style.maxHeight = firstContent.scrollHeight + 'px';
                     }
                   });
                 </script>
