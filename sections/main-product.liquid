@@ -1145,14 +1145,26 @@
                 <script defer>
                   function openAccordion(header, content) {
                     header.classList.add('active');
-                    content.style.maxHeight = content.scrollHeight + 'px';
                     content.classList.add('open');
+                    // force a fresh layout before measuring — without this the very
+                    // first open can read a stale scrollHeight (e.g. while a webfont
+                    // is still swapping in or another accordion is mid-collapse from
+                    // the "close all other" step below), causing it to overshoot.
+                    // A second open/close is correct because layout has settled by then.
+                    void content.offsetHeight;
+                    content.style.maxHeight = content.scrollHeight + 'px';
                   }
 
                   function closeAccordion(header, content) {
                     header.classList.remove('active');
                     content.style.maxHeight = null;
                     content.classList.remove('open');
+                  }
+
+                  function refreshOpenAccordionHeights() {
+                    document.querySelectorAll('.accordion-content.open').forEach((content) => {
+                      content.style.maxHeight = content.scrollHeight + 'px';
+                    });
                   }
 
                   document.addEventListener('click', (e) => {
@@ -1175,13 +1187,16 @@
 
                   // FIX iOS
                   document.querySelectorAll('.accordion-content img').forEach((img) => {
-                    img.addEventListener('load', () => {
-                      const content = img.closest('.accordion-content');
-                      if (content.classList.contains('open')) {
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                      }
-                    });
+                    img.addEventListener('load', refreshOpenAccordionHeights);
                   });
+
+                  // re-measure once webfonts finish swapping in and once the full
+                  // page (images included) has loaded — covers the case where the
+                  // first open's height was computed against not-yet-final layout.
+                  if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(refreshOpenAccordionHeights);
+                  }
+                  window.addEventListener('load', refreshOpenAccordionHeights);
 
                   /* 🔥 OPEN FIRST ACCORDION BY DEFAULT */
                   document.addEventListener('DOMContentLoaded', () => {
@@ -1191,6 +1206,7 @@
                     if (firstHeader && firstContent) {
                       firstHeader.classList.add('active');
                       firstContent.classList.add('open');
+                      void firstContent.offsetHeight;
                       firstContent.style.maxHeight = firstContent.scrollHeight + 'px';
                     }
                   });
