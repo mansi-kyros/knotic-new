@@ -3667,8 +3667,8 @@ details-disclosure > details {
   line-height: 1;
 }
 
-.card-swiper-prev { left: 8px; }
-.card-swiper-next { right: 8px; }
+.card-swiper-prev { left: 0px; }
+.card-swiper-next { right: 0px; }
 
 .card__media:hover .card-swiper-prev,
 .card__media:hover .card-swiper-next {
