@@ -3652,6 +3652,7 @@ details-disclosure > details {
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
+  background: #ffffff00;
   border: none;
   border-radius: 50%;
   width: 32px;
